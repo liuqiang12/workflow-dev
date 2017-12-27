@@ -6,7 +6,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 /**
- * @Author LHR
+ * @Author DELL
  * Create By 2017/8/22
  */
 @Configuration

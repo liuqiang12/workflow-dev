@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * @Author LHR
+ * @Author DELL
  * Create By 2017/9/6
  */
 @Api("通知消息接口")

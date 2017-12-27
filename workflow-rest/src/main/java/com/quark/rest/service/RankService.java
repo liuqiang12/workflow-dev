@@ -3,7 +3,7 @@ package com.quark.rest.service;
 import java.util.List;
 
 /**
- * @Author LHR
+ * @Author DELL
  * Create By 2017/8/31
  */
 public interface RankService {

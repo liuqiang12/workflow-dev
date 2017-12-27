@@ -10,7 +10,7 @@ import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @Author LHR
+ * @Author DELL
  * Create By 2017/9/6
  */
 

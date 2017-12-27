@@ -5,7 +5,7 @@ import com.quark.common.entity.Posts;
 import org.springframework.data.domain.Page;
 
 /**
- * @Author LHR
+ * @Author DELL
  * Create By 2017/9/3
  */
 public interface PostsService extends BaseService<Posts>{

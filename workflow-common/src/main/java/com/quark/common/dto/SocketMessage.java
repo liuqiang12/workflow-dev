@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * WebSocket通知消息类
  *
- * @Author LHR
+ * @Author DELL
  * Create By 2017/9/6
  */
 public class SocketMessage implements Serializable{

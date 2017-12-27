@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * @Author LHR
+ * @Author DELL
  * Create By 2017/8/21
  */
 @SpringBootApplication

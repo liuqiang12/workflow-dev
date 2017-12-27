@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @Author LHR
+ * @Author DELL
  * Create By 2017/8/24
  *
  * 跨域的支持
