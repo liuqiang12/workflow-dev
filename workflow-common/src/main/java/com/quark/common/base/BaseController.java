@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @Author LHR
+ * @Author DELL
  * Create By 2017/8/13
  */
 public class BaseController {

@@ -1,7 +1,7 @@
 package com.quark.common.utils;
 
 /**
- * @Author LHR
+ * @Author DELL
  * Create By 2017/8/19
  */
 public class Constants {

@@ -1,7 +1,7 @@
 package com.quark.chat.protocol;
 
 /**
- * @Author : ChinaLHR
+ * @Author : ChinaDELL
  * @Date : Create in 16:37 2017/10/23
  * @Email : 13435500980@163.com
  *

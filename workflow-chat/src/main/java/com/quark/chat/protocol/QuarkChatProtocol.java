@@ -10,7 +10,7 @@ import java.util.Set;
 import static com.quark.chat.protocol.QuarkChatType.*;
 
 /**
- * @Author : ChinaLHR
+ * @Author : ChinaDELL
  * @Date : Create in 11:20 2017/10/22
  * @Email : 13435500980@163.com
  *

@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Author LHR
+ * @Author DELL
  * Create By 2017/8/24
  */
 public class HttpClientUtils {

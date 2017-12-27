@@ -14,8 +14,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.sql.DataSource;
 
 /**
- * Created by lhr on 17-7-31.
- * user.setUsername("lhr");
+ * Created by DELL on 17-7-31.
+ * user.setUsername("DELL");
  * user.setPassword("root");
  */
 @RunWith(SpringRunner.class)

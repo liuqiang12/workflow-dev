@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @Author LHR
+ * @Author DELL
  * Create By 2017/8/21
  */
 public interface UserService extends BaseService<User> {
