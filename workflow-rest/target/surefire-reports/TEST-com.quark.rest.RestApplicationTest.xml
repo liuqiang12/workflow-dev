@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="com.quark.rest.RestApplicationTest" time="0.48" errors="0" skipped="0">
+<testsuite tests="1" failures="0" name="com.quark.rest.RestApplicationTest" time="0.026" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2017.1"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_151\jre\bin"/>
     <property name="java.vm.version" value="25.151-b12"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
-    <property name="maven.multiModuleProjectDirectory" value="E:\standwsp\BBS\JavaQuarkBBS-master\quark-rest"/>
+    <property name="maven.multiModuleProjectDirectory" value="E:\IntelliJ\workspace_git\workflow-dev\workflow-rest"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=";"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -17,7 +17,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="E:\standwsp\BBS\JavaQuarkBBS-master\quark-rest"/>
+    <property name="user.dir" value="E:\IntelliJ\workspace_git\workflow-dev\workflow-rest"/>
     <property name="java.runtime.version" value="1.8.0_151-b12"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_151\jre\lib\endorsed"/>
@@ -30,7 +30,7 @@
     <property name="os.name" value="Windows 7"/>
     <property name="classworlds.conf" value="D:\java\maven\mvn\apache-maven-3.3.9\bin\m2.conf"/>
     <property name="sun.jnu.encoding" value="GBK"/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_151\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\ProgramData\Oracle\Java\javapath;d:\app\product\11.2.0\dbhome_2\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_121;C:\Program Files\Java\jdk1.8.0_121\bin;C:\Program Files\Java\jdk1.8.0_121\lib\dt.jar;C:\Program Files\Java\jdk1.8.0_121\lib\tools.jar;D:\java\maven\mvn\apache-maven-3.3.9\bin;D:\java\mysql-5.7.17-winx64\bin;D:\jrebel\jrebel6\jrebel.jar;C:\Program Files\Java\jdk1.8.0_121\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_121\jre\lib\charsets.jar;C:\Program Files\TortoiseSVN\bin;D:\java\apache-cxf-3.1.12\bin;C:\Program Files (x86)\nodejs\;C:\Program Files\Git\cmd;C:\Users\DELL\AppData\Roaming\npm;C:\Users\DELL\AppData\Local\GitHubDesktop\bin;."/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_151\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\ProgramData\Oracle\Java\javapath;d:\app\product\11.2.0\dbhome_2\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_121;C:\Program Files\Java\jdk1.8.0_121\bin;C:\Program Files\Java\jdk1.8.0_121\lib\dt.jar;C:\Program Files\Java\jdk1.8.0_121\lib\tools.jar;D:\java\maven\mvn\apache-maven-3.3.9\bin;D:\java\mysql-5.7.17-winx64\bin;D:\jrebel\jrebel6\jrebel.jar;C:\Program Files\Java\jdk1.8.0_121\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_121\jre\lib\charsets.jar;C:\Program Files\TortoiseSVN\bin;D:\java\apache-cxf-3.1.12\bin;C:\Program Files (x86)\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\gradle-2.3\bin;C:\Users\DELL\AppData\Roaming\npm;C:\Users\DELL\AppData\Local\GitHubDesktop\bin;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -62,5 +62,5 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.quark.rest.RestApplicationTest" name="testDataSource" time="0.48"/>
+  <testcase classname="com.quark.rest.RestApplicationTest" name="testDataSource" time="0.026"/>
 </testsuite>

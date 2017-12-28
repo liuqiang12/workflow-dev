@@ -96,7 +96,7 @@ layui.define(['laypage', 'fly'], function(exports){
     }
   };
 
-  $('body').on('click', '.jie-admin', function(){
+  $('body').on('click', '.jie-oauth', function(){
     var othis = $(this), type = othis.attr('type');
     gather.jieAdmin[type].call(this, othis.parent());
   });
@@ -109,7 +109,7 @@ layui.define(['laypage', 'fly'], function(exports){
       fly.json('/collection/find/', {
         cid: div.data('id')
       }, function(res){
-        jieAdmin.append('<span class="layui-btn layui-btn-mini jie-admin '+ (res.data.collection ? 'layui-btn-danger' : '') +'" type="collect" data-type="'+ (res.data.collection ? 'remove' : 'add') +'">'+ (res.data.collection ? '取消收藏' : '收藏') +'</span>');
+        jieAdmin.append('<span class="layui-btn layui-btn-mini jie-oauth '+ (res.data.collection ? 'layui-btn-danger' : '') +'" type="collect" data-type="'+ (res.data.collection ? 'remove' : 'add') +'">'+ (res.data.collection ? '取消收藏' : '收藏') +'</span>');
       });
     }
   }();
