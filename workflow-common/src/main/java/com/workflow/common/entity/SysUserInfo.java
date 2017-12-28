@@ -30,6 +30,11 @@ public class SysUserInfo implements Serializable{
     //是否可以使用,默认为１
     @Column(nullable = false)
     private Integer enable = 1;
+    // 头像
+    private String icon ="http://127.0.0.1/images/upload/default.png";
+    //注册邮箱
+    @Column(nullable = false)
+    private String email;
 
     @JsonIgnore
     @JoinTable(name = "SYS_USER_LN_ROLE",
@@ -78,12 +83,30 @@ public class SysUserInfo implements Serializable{
         this.roles = roles;
     }
 
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "AdminUser{" +
                 "Id=" + id +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
-                ", enable=" + enable;
+                ", enable=" + enable+ '\'' +
+                ", icon=" + icon+ '\'' +
+                ", email=" + email;
     }
 }

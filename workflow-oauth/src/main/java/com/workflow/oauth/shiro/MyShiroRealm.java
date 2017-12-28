@@ -2,8 +2,8 @@ package com.workflow.oauth.shiro;
 
 import com.workflow.common.entity.SysPermission;
 import com.workflow.common.entity.SysUserInfo;
-import com.workflow.oauth.service.AdminUserService;
-import com.workflow.oauth.service.PermissionService;
+import com.workflow.oauth.service.SysPermissionService;
+import com.workflow.oauth.service.SysUserInfoService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -22,10 +22,10 @@ import java.util.List;
 public class MyShiroRealm extends AuthorizingRealm {
 
     @Resource
-    private AdminUserService adminUserService;
+    private SysUserInfoService userinfoService;
 
     @Resource
-    private PermissionService permissionService;
+    private SysPermissionService permissionService;
 
     /**
      * 授权
@@ -54,7 +54,7 @@ public class MyShiroRealm extends AuthorizingRealm {
         //获取用户的输入的账号.
         String username = (String)token.getPrincipal();
         /** 获取用户信息 **/
-        SysUserInfo user = adminUserService.findByUserName(username);
+        SysUserInfo user = userinfoService.findByUserName(username);
         if(user==null) throw new UnknownAccountException();
         if (0==user.getEnable()) {
             throw new LockedAccountException(); // 帐号锁定

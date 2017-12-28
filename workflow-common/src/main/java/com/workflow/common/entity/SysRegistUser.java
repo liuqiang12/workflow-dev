@@ -128,7 +128,7 @@ public class SysRegistUser implements Serializable {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", username='" + userName + '\'' +
+                ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", Icon='" + icon + '\'' +
                 ", signature='" + signature + '\'' +

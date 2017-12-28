@@ -28,7 +28,7 @@ public interface SysUserInfoService extends BaseService<SysUserInfo>{
      * @param entity
      * @return
      */
-    void saveAdmin(SysUserInfo entity);
+    void saveUser(SysUserInfo entity);
 
     /**
      * 保存用户的角色
@@ -36,11 +36,12 @@ public interface SysUserInfoService extends BaseService<SysUserInfo>{
      * @param roles
      * @return
      */
-    void saveAdminRoles(Integer uid,Integer[] roles);
+    void saveUserRoles(Integer uid,Integer[] roles);
 
     /**
      * 开启/禁用用户
      * @param ids
      */
-    void saveAdminEnable(Integer[] ids);
+    void saveUserEnable(Integer[] ids);
+
 }

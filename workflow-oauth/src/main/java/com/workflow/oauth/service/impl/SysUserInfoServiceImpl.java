@@ -28,12 +28,12 @@ public class SysUserInfoServiceImpl extends BaseServiceImpl<SysUserInfoDao, SysU
     private SysRoleInfoService roleService;
 
     @Override
-    public SysUserInfo findByUserName(String username) {
-        return repository.findByUsername(username);
+    public SysUserInfo findByUserName(String userName) {
+        return repository.findByUserName(userName);
     }
 
     @Override
-    public Page<SysUserInfo> findByPage(SysUserInfo adminUser, int pageNo, int length) {
+    public Page<SysUserInfo> findByPage(SysUserInfo userInfo, int pageNo, int length) {
         PageRequest pageable = new PageRequest(pageNo, length);
 
         Specification<SysUserInfo> specification = new Specification<SysUserInfo>() {
@@ -45,10 +45,10 @@ public class SysUserInfoServiceImpl extends BaseServiceImpl<SysUserInfoDao, SysU
                 Path<Integer> $enable = root.get("enable");
 
                 ArrayList<Predicate> list = new ArrayList<>();
-                if (adminUser.getId() != null) list.add(criteriaBuilder.equal($id, adminUser.getId()));
-                if (adminUser.getEnable() != null) list.add(criteriaBuilder.equal($enable, adminUser.getEnable()));
-                if (adminUser.getUserName() != null)
-                    list.add(criteriaBuilder.like($username, "%" + adminUser.getUserName() + "%"));
+                if (userInfo.getId() != null) list.add(criteriaBuilder.equal($id, userInfo.getId()));
+                if (userInfo.getEnable() != null) list.add(criteriaBuilder.equal($enable, userInfo.getEnable()));
+                if (userInfo.getUserName() != null)
+                    list.add(criteriaBuilder.like($username, "%" + userInfo.getUserName() + "%"));
 
                 Predicate predicate = criteriaBuilder.and(list.toArray(new Predicate[list.size()]));
                 return predicate;
@@ -61,7 +61,7 @@ public class SysUserInfoServiceImpl extends BaseServiceImpl<SysUserInfoDao, SysU
     }
 
     @Override
-    public void saveAdmin(SysUserInfo entity) {
+    public void saveUser(SysUserInfo entity) {
         entity.setEnable(1);
         PasswordHelper passwordHelper = new PasswordHelper();
         passwordHelper.encryptPassword(entity);
@@ -69,7 +69,7 @@ public class SysUserInfoServiceImpl extends BaseServiceImpl<SysUserInfoDao, SysU
     }
 
     @Override
-    public void saveAdminRoles(Integer uid, Integer[] roles) {
+    public void saveUserRoles(Integer uid, Integer[] roles) {
         SysUserInfo adminUser = findOne(uid);
         if (roles == null) {
             adminUser.setRoles(new HashSet<>());
@@ -81,7 +81,7 @@ public class SysUserInfoServiceImpl extends BaseServiceImpl<SysUserInfoDao, SysU
     }
 
     @Override
-    public void saveAdminEnable(Integer[] ids) {
+    public void saveUserEnable(Integer[] ids) {
 
         List<SysUserInfo> all = findAll(Arrays.asList(ids));
         for (SysUserInfo user : all) {

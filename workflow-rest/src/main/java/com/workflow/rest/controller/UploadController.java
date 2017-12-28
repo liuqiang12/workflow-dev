@@ -2,10 +2,8 @@ package com.workflow.rest.controller;
 
 import com.workflow.common.dto.UploadResult;
 import com.workflow.common.exception.ServiceProcessException;
-import com.workflow.rest.service.UserService;
 import com.workflow.rest.utils.FileUtils;
 import io.swagger.annotations.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,8 +19,8 @@ import java.io.IOException;
 @RequestMapping("/upload")
 public class UploadController {
 
-    @Autowired
-    private UserService userService;
+    /*@Autowired
+    private UserService userService;*/
     @ApiOperation(value = "图片上传接口", notes = "图片上传接口说明，后期如果控制文件上传类型如doc或者ftp等都需要在界面控件中验证", response = UploadResult.class)
     @ApiResponses(
         value =
@@ -55,7 +53,7 @@ public class UploadController {
         if (!file.isEmpty()) {
             try {
                 String icon = FileUtils.uploadFile(file);
-                userService.updataUserIcon(token,icon);
+                //userService.updataUserIcon(token,icon);
                 return new UploadResult(0, new UploadResult.Data(icon));
 
             } catch (IOException e) {

@@ -1,8 +1,5 @@
 package com.workflow.common;
 
-import com.workflow.common.dao.LabelDao;
-import com.workflow.common.dao.NotificationDao;
-import com.workflow.common.dao.PostsDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +18,8 @@ public class CommonApplicationTest {
     @Autowired
     private DataSource dataSource;
 
-    @Autowired
-    private com.workflow.common.dao.UserDao UserDao;
-
-    @Autowired
-    private PostsDao postsDao;
-
-    @Autowired
-    private LabelDao labelDao;
-
-    @Autowired
-    private NotificationDao notificationDao;
+    /*@Autowired
+    private com.workflow.common.dao.UserDao UserDao;*/
 
     @Test
     public void TestDataSource(){

@@ -1,9 +1,9 @@
 package com.workflow.oauth.config;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
-import com.workflow.oauth.service.PermissionService;
+import com.workflow.common.entity.SysPermission;
+import com.workflow.oauth.service.SysPermissionService;
 import com.workflow.oauth.shiro.MyShiroRealm;
-import com.workflow.common.entity.Permission;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -29,7 +29,7 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
     @Autowired
-    private PermissionService permissionService;
+    private SysPermissionService permissionService;
 
     @Value("${spring.redis.host}")
     private String host;
@@ -107,11 +107,11 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/font-awesome/**", "anon");
 
         //自定义加载权限资源关系
-        List<Permission> list = permissionService.findAll();
-        for (Permission p : list) {
-            if (!p.getPerurl().isEmpty()) {
-                String permission = "perms[" + p.getPerurl() + "]";
-                filterChainDefinitionMap.put(p.getPerurl(), permission);
+        List<SysPermission> list = permissionService.findAll();
+        for (SysPermission p : list) {
+            if (!p.getPerUrl().isEmpty()) {
+                String permission = "perms[" + p.getPerUrl() + "]";
+                filterChainDefinitionMap.put(p.getPerUrl(), permission);
             }
         }
 

@@ -2,7 +2,6 @@ package com.workflow.design.server;
 
 import com.workflow.design.handler.MessageHandler;
 import com.workflow.design.handler.UserAuthHandler;
-import com.workflow.design.service.ChannelManager;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -27,7 +26,6 @@ import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Component
@@ -53,8 +51,8 @@ public class QuarkChatServer implements Server {
     @Autowired
     private MessageHandler messageHandler;
 
-    @Autowired
-    private ChannelManager manager;
+    /*@Autowired
+    private ChannelManager manager;*/
 
     @PostConstruct
     @Override
@@ -126,24 +124,24 @@ public class QuarkChatServer implements Server {
             /**
              * 定时扫描Channel 关闭失效的Channel
              */
-            executorService.scheduleAtFixedRate(new Runnable() {
+            /*executorService.scheduleAtFixedRate(new Runnable() {
                 @Override
                 public void run() {
                     logger.info("scheduleAtFixedRate to close channel");
                     manager.scanNotActiveChannel();
                 }
-            },3,60, TimeUnit.SECONDS);//initialDelay：延迟三秒执行，period：任务执行的间隔周期
+            },3,60, TimeUnit.SECONDS);*///initialDelay：延迟三秒执行，period：任务执行的间隔周期
 
             /**
              * 定时向客户端发送Ping进行心跳检测
              */
-            executorService.scheduleAtFixedRate(new Runnable() {
+            /*executorService.scheduleAtFixedRate(new Runnable() {
                 @Override
                 public void run() {
                     logger.info("scheduleAtFixedRate to ping");
                     manager.broadPing();
                 }
-            },3,50,TimeUnit.SECONDS);
+            },3,50,TimeUnit.SECONDS);*/
         }catch (InterruptedException e){
             logger.error("Quark Chat fail ",e);
             Thread.currentThread().interrupt();

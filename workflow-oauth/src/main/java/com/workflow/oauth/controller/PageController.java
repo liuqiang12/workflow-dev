@@ -1,6 +1,6 @@
 package com.workflow.oauth.controller;
 
-import com.workflow.common.entity.AdminUser;
+import com.workflow.common.entity.SysUserInfo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.LockedAccountException;
@@ -35,14 +35,14 @@ public class PageController {
      * @return
      */
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public String login(HttpServletRequest request, AdminUser user, Model model) {
+    public String login(HttpServletRequest request, SysUserInfo user, Model model) {
 
-        if (StringUtils.isEmpty(user.getUsername())||StringUtils.isEmpty(user.getPassword())){
+        if (StringUtils.isEmpty(user.getUserName())||StringUtils.isEmpty(user.getPassword())){
             request.setAttribute("msg","用户名或者密码不能为空!");
             return "login";
         }
         Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token=new UsernamePasswordToken(user.getUsername(),user.getPassword());
+        UsernamePasswordToken token=new UsernamePasswordToken(user.getUserName(),user.getPassword());
         try {
             subject.login(token);
             return "redirect:/initPage";

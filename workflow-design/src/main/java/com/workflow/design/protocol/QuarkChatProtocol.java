@@ -1,8 +1,8 @@
 package com.workflow.design.protocol;
 
 import com.alibaba.fastjson.JSONObject;
+import com.workflow.common.entity.SysUserInfo;
 import com.workflow.design.utils.DateTimeUtil;
-import com.workflow.common.entity.User;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -77,7 +77,7 @@ public class QuarkChatProtocol {
      * @param users
      * @return
      */
-    public static String buildSysUserInfo(Set<User> users){
+    public static String buildSysUserInfo(Set<SysUserInfo> users){
         HashMap<String, Object> map = new HashMap<>();
         map.put("count",users.size());
         map.put("userinfo",users);
@@ -96,10 +96,10 @@ public class QuarkChatProtocol {
      * Message(Server)
      * @return
      */
-    public static String buildMessageCode(User user,String msg){
+    public static String buildMessageCode(SysUserInfo user,String msg){
         HashMap<String, Object> map = new HashMap<>();
         map.put("uid",user.getId());
-        map.put("name",user.getUsername());
+        map.put("name",user.getUserName());
         map.put("icon",user.getIcon());
         map.put("time", DateTimeUtil.getCurrentDateTime());
         map.put("msg",msg);

@@ -1,27 +1,19 @@
 package com.workflow.rest.service.impl;
 
 import com.workflow.common.base.BaseServiceImpl;
-import com.workflow.common.dao.UserDao;
-import com.workflow.common.entity.User;
-import com.workflow.common.exception.ServiceProcessException;
-import com.workflow.rest.service.RedisService;
-import com.workflow.rest.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import com.workflow.common.dao.SysUserInfoDao;
+import com.workflow.common.entity.SysUserInfo;
+import com.workflow.rest.service.SysRegistUserService;
 import org.springframework.stereotype.Service;
-import org.springframework.util.DigestUtils;
-
-import java.util.Date;
-import java.util.UUID;
 
 @Service
-public class UserServiceImpl extends BaseServiceImpl<UserDao, User> implements UserService {
+public class UserServiceImpl extends BaseServiceImpl<SysUserInfoDao, SysUserInfo> implements SysRegistUserService {
 
-    @Autowired
+    /*@Autowired
     private RedisService<Integer> redisSocketService;
 
     @Autowired
-    private RedisService<User> redisService;
+    private RedisService<SysRegistUser> redisService;
 
     @Value("${REDIS_USERID_KEY}")
     private String REDIS_USERID_KEY;
@@ -31,31 +23,31 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, User> implements U
 
     @Value("${REDIS_USER_TIME}")
     private Integer REDIS_USER_TIME;
-
-    @Override
+*/
+   /* @Override
     public boolean checkUserName(String username) {
-        User user = repository.findByUsername(username);
+        SysRegistUser user = repository.findByUsername(username);
         if (user == null) return true;
         return false;
     }
 
     @Override
     public boolean checkUserEmail(String email) {
-        User user = repository.findByEmail(email);
+        SysRegistUser user = repository.findByEmail(email);
         if (user == null) return true;
         return false;
     }
 
     @Override
-    public User findByEmail(String email) {
+    public SysRegistUser findByEmail(String email) {
         return repository.findByEmail(email);
     }
 
     @Override
     public void createUser(String email, String username, String password) {
-        User user = new User();
+        SysRegistUser user = new SysRegistUser();
         user.setEmail(email);
-        user.setUsername(username);
+        user.setUserName(username);
         user.setInitTime(new Date());
         user.setPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
         repository.save(user);
@@ -64,7 +56,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, User> implements U
 
 
     @Override
-    public String LoginUser(User user) {
+    public String LoginUser(SysRegistUser user) {
         String token = UUID.randomUUID().toString();
         redisService.cacheString(REDIS_USER_KEY + token, user, REDIS_USER_TIME);
         redisSocketService.cacheSet(REDIS_USERID_KEY,user.getId());
@@ -73,14 +65,14 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, User> implements U
     }
 
     @Override
-    public User getUserByToken(String token) {
-        User user = redisService.getStringAndUpDate(REDIS_USER_KEY + token, REDIS_USER_TIME);
+    public SysRegistUser getUserByToken(String token) {
+        SysRegistUser user = redisService.getStringAndUpDate(REDIS_USER_KEY + token, REDIS_USER_TIME);
         return user;
     }
 
     @Override
     public void LogoutUser(String token) {
-        User user = getUserByToken(token);
+        SysRegistUser user = getUserByToken(token);
         redisService.deleteString(REDIS_USER_KEY + token);
         redisSocketService.deleteSet(REDIS_USERID_KEY,user.getId());
 //        loginId.remove(user.getId());//维护一个登录用户的set
@@ -88,10 +80,10 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, User> implements U
 
     @Override
     public void updateUser(String token, String username, String signature, Integer sex) {
-        User cacheuser = redisService.getString(REDIS_USER_KEY + token);
+        SysRegistUser cacheuser = redisService.getString(REDIS_USER_KEY + token);
         if (cacheuser == null) throw new ServiceProcessException("session过期,请重新登录");
-        User user = repository.findOne(cacheuser.getId());
-        user.setUsername(username);
+        SysRegistUser user = repository.findOne(cacheuser.getId());
+        user.setUserName(username);
         user.setSex(sex);
         user.setSignature(signature);
         repository.save(user);
@@ -100,10 +92,10 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, User> implements U
 
     @Override
     public void updataUserIcon(String token, String icon) {
-        User cacheuser = redisService.getString(REDIS_USER_KEY + token);
+        SysRegistUser cacheuser = redisService.getString(REDIS_USER_KEY + token);
         if (cacheuser == null)
             throw new ServiceProcessException("用户Session过期，请重新登录");
-        User user = repository.findOne(cacheuser.getId());
+        SysRegistUser user = repository.findOne(cacheuser.getId());
         user.setIcon(icon);
         repository.save(user);
         redisService.cacheString(REDIS_USER_KEY + token, user, REDIS_USER_TIME);
@@ -112,16 +104,16 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, User> implements U
 
     @Override
     public void updateUserPassword(String token, String oldpsd, String newpsd) {
-        User cacheuser = redisService.getString(REDIS_USER_KEY + token);
+        SysRegistUser cacheuser = redisService.getString(REDIS_USER_KEY + token);
         if (cacheuser == null)
             throw new ServiceProcessException("用户Session过期，请重新登录");
-        User user = repository.findOne(cacheuser.getId());
+        SysRegistUser user = repository.findOne(cacheuser.getId());
         if(!user.getPassword().equals(DigestUtils.md5DigestAsHex(oldpsd.getBytes())))
             throw new ServiceProcessException("原始密码错误,请重新输入");
         user.setPassword(DigestUtils.md5DigestAsHex(newpsd.getBytes()));
         repository.save(user);
         redisService.deleteString(REDIS_USER_KEY+token);
     }
-
+*/
 
 }

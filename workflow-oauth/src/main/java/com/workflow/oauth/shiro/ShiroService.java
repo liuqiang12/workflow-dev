@@ -1,7 +1,7 @@
 package com.workflow.oauth.shiro;
 
 import com.workflow.common.entity.SysPermission;
-import com.workflow.oauth.service.PermissionService;
+import com.workflow.oauth.service.SysPermissionService;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.mgt.DefaultFilterChainManager;
 import org.apache.shiro.web.filter.mgt.PathMatchingFilterChainResolver;
@@ -21,7 +21,7 @@ public class ShiroService {
     @Autowired
     private ShiroFilterFactoryBean shiroFilterFactoryBean;
     @Autowired
-    private PermissionService permissionService;
+    private SysPermissionService permissionService;
     @Autowired
     private RedisSessionDAO redisSessionDAO;
 

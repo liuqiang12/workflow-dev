@@ -21,7 +21,7 @@ public interface SysUserInfoDao extends JpaRepository<SysUserInfo,Integer>,JpaSp
     @Cacheable
     List<SysUserInfo> findAll();
 
-    SysUserInfo findByUsername(String username);
+    SysUserInfo findByUserName(String userName);
 
     @Cacheable
     @Override

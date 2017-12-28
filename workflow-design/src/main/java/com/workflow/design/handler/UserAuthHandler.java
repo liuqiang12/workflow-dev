@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.workflow.design.protocol.QuarkChatProtocol;
 import com.workflow.design.protocol.QuarkClientProtocol;
-import com.workflow.design.service.ChannelManager;
 import com.workflow.design.utils.NettyUtil;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
@@ -16,7 +15,6 @@ import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -38,8 +36,8 @@ public class UserAuthHandler extends SimpleChannelInboundHandler {
     @Value("${WEBSOCKET_URL}")
     private String WEBSOCKET_URL;
 
-    @Autowired
-    private ChannelManager manager;
+    /*@Autowired
+    private ChannelManager manager;*/
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
@@ -68,9 +66,9 @@ public class UserAuthHandler extends SimpleChannelInboundHandler {
             if (event.state().equals(IdleState.READER_IDLE)) {
                 final String address = NettyUtil.parseChannelRemoteAddr(ctx.channel());
                 logger.warn("Netty Server UserAuthHandler: IDLE exception :{}", address);
-                manager.removeChannel(ctx.channel());
+                /*manager.removeChannel(ctx.channel());
                 //广播用户数量
-                manager.broadMessage(QuarkChatProtocol.buildSysUserInfo(manager.getUsers()));
+                manager.broadMessage(QuarkChatProtocol.buildSysUserInfo(manager.getUsers()));*/
             }
         }
     }
@@ -94,7 +92,7 @@ public class UserAuthHandler extends SimpleChannelInboundHandler {
             // 动态加入websocket的编解码处理
             handshaker.handshake(ctx.channel(), request);
             // 存储已经连接的Channel
-            manager.addChannel(ctx.channel());
+           // manager.addChannel(ctx.channel());
         }
     }
 
@@ -107,7 +105,7 @@ public class UserAuthHandler extends SimpleChannelInboundHandler {
         //判断是否是关闭链路的命令
         if (frame instanceof CloseWebSocketFrame){
             handshaker.close(ctx.channel(), (CloseWebSocketFrame) frame.retain());
-            manager.removeChannel(ctx.channel());
+            //manager.removeChannel(ctx.channel());
             logger.info("Have a WebSocket Channel Close");
             return;
         }
@@ -138,15 +136,15 @@ public class UserAuthHandler extends SimpleChannelInboundHandler {
             case PING_CODE:
             case PONG_CODE:
                 //接受到Pong消息后更新User的时间，便于定时清理过期掉线的用户
-                manager.updateUserTime(channel);
+                //manager.updateUserTime(channel);
                 logger.info("receiver pong message address :{}",NettyUtil.parseChannelRemoteAddr(channel));
                 return;
             case AUTH_REQUEST_CODE:
                 //进行认证
-                boolean isSuccess = manager.authUser(clientProto.getToken(), channel);
+               /* boolean isSuccess = manager.authUser(clientProto.getToken(), channel);
                 manager.broadMessage(QuarkChatProtocol.buildAuthProto(isSuccess));
                 if (isSuccess)
-                    manager.broadMessage(QuarkChatProtocol.buildSysUserInfo(manager.getUsers()));
+                    manager.broadMessage(QuarkChatProtocol.buildSysUserInfo(manager.getUsers()));*/
                 return;
             case MESSAGE_REQUEST_CODE:
                 break;//普通的消息留给MessageHandler处理
