@@ -18,8 +18,6 @@ public class WebSocketService {
     @Autowired
     private WebSocketController webSocketController;
 
-    @Autowired
-    private NotificationService notificationService;
 
     @Value("${REDIS_USERID_KEY}")
     private String REDIS_USERID_KEY;
@@ -42,8 +40,8 @@ public class WebSocketService {
 //        boolean islogin = userService.loginId.contains(id);
         if (islogin){
             //查询未查看的通知
-            long count = notificationService.getNotificationCount(id);
-            SocketMessage message = SocketMessage.build((int) count);
+           /* long count = notificationService.getNotificationCount(id);*/
+            SocketMessage message = SocketMessage.build((int) 0);
             webSocketController.template.convertAndSendToUser(id+"","/message",message);
         }
 

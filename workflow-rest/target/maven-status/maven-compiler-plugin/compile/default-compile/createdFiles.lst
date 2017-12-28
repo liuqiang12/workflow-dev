@@ -1,0 +1,3 @@
+com\workflow\rest\controller\UploadController.class
+com\workflow\rest\service\impl\UserServiceImpl.class
+com\workflow\rest\service\SysRegistUserService.class
