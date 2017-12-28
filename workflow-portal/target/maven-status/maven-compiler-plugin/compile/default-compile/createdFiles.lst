@@ -1,9 +1,6 @@
-com\workflow\portal\controller\PostsController.class
 com\workflow\portal\utils\HttpClientUtils.class
 com\workflow\portal\service\impl\UserServiceImpl.class
 com\workflow\portal\entity\User.class
-com\workflow\portal\controller\LabelController.class
-com\workflow\portal\controller\PageController.class
 com\workflow\portal\config\PropertiesConfig.class
 com\workflow\portal\config\GlobalExceptionHandler.class
 com\workflow\portal\controller\UserController.class
