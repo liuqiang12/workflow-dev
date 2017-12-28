@@ -1,6 +1,6 @@
 package com.workflow.common.dao;
 
-import com.workflow.common.entity.AdminUser;
+import com.workflow.common.entity.SysUserInfo;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
@@ -13,15 +13,15 @@ import java.util.List;
 
 
 @Repository
-@CacheConfig(cacheNames = "adminusers")
-public interface AdminUserDao extends JpaRepository<AdminUser,Integer>,JpaSpecificationExecutor {
+@CacheConfig(cacheNames = "sysUserInfos")
+public interface SysUserInfoDao extends JpaRepository<SysUserInfo,Integer>,JpaSpecificationExecutor {
 
-    AdminUser findOne(Integer integer);
+    SysUserInfo findOne(Integer integer);
 
     @Cacheable
-    List<AdminUser> findAll();
+    List<SysUserInfo> findAll();
 
-    AdminUser findByUsername(String username);
+    SysUserInfo findByUsername(String username);
 
     @Cacheable
     @Override

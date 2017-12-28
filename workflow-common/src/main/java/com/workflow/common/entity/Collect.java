@@ -26,7 +26,7 @@ public class Collect implements Serializable{
     //与用户的关联关系：立即加载
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "user_id")
-    private User user;
+    private SysUserInfo user;
 
     //收藏时间
     @JsonFormat(pattern = Constants.DATETIME_FORMAT)
@@ -48,11 +48,11 @@ public class Collect implements Serializable{
         this.posts = posts;
     }
 
-    public User getUser() {
+    public SysUserInfo getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(SysUserInfo user) {
         this.user = user;
     }
 

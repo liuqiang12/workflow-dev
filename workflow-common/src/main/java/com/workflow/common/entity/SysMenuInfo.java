@@ -7,10 +7,12 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-
+/**
+ * 菜单角色  多对多关系
+ */
 @Entity
-@Table(name = "workflow_permission")
-public class Permission implements Serializable{
+@Table(name = "SYS_MENU_INFO")
+public class SysMenuInfo implements Serializable{
 
     @Id
     @GeneratedValue
@@ -18,14 +20,15 @@ public class Permission implements Serializable{
 
     private String name;
 
-    private String perurl;
-
-    //资源类型　　1：菜单　2：按钮
-    private Integer type;
+    @Column(unique = true, name = "PER_URL")
+    private String perUrl;
 
     //父权限
-    @Column(nullable = false)
-    private Integer parentid;
+    @Column(name = "PARENT_ID")
+    private Integer parentId;
+
+    //资源类型　　1：菜单　2：按钮
+    private Integer type = 2;//默认是按钮类型
 
     //排序
     private Integer sort;
@@ -35,8 +38,8 @@ public class Permission implements Serializable{
     private String checked;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "permissions")
-    private Set<Role> roles = new HashSet<>();
+    @ManyToMany(mappedBy = "menus")
+    private Set<SysRoleInfo> roles = new HashSet<SysRoleInfo>();
 
     public Integer getId() {
         return id;
@@ -54,12 +57,12 @@ public class Permission implements Serializable{
         this.name = name;
     }
 
-    public String getPerurl() {
-        return perurl;
+    public String getPerUrl() {
+        return perUrl;
     }
 
-    public void setPerurl(String perurl) {
-        this.perurl = perurl;
+    public void setPerUrl(String perUrl) {
+        this.perUrl = perUrl;
     }
 
     public Integer getType() {
@@ -70,12 +73,12 @@ public class Permission implements Serializable{
         this.type = type;
     }
 
-    public Integer getParentid() {
-        return parentid;
+    public Integer getParentId() {
+        return parentId;
     }
 
-    public void setParentid(Integer parentid) {
-        this.parentid = parentid;
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 
     public Integer getSort() {
@@ -86,11 +89,11 @@ public class Permission implements Serializable{
         this.sort = sort;
     }
 
-    public Set<Role> getRoles() {
+    public Set<SysRoleInfo> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Set<SysRoleInfo> roles) {
         this.roles = roles;
     }
 

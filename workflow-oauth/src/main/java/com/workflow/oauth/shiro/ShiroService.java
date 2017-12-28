@@ -1,7 +1,7 @@
 package com.workflow.oauth.shiro;
 
+import com.workflow.common.entity.SysPermission;
 import com.workflow.oauth.service.PermissionService;
-import com.workflow.common.entity.Permission;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.mgt.DefaultFilterChainManager;
 import org.apache.shiro.web.filter.mgt.PathMatchingFilterChainResolver;
@@ -37,12 +37,12 @@ public class ShiroService {
         filterChainDefinitionMap.put("/js/**","anon");
         filterChainDefinitionMap.put("/img/**","anon");
         filterChainDefinitionMap.put("/font-awesome/**","anon");
-        List<Permission> permissionList = permissionService.findAll();
-        for(Permission p:permissionList){
+        List<SysPermission> permissionList = permissionService.findAll();
+        for(SysPermission p:permissionList){
 
-            if (!StringUtils.isEmpty(p.getPerurl())) {
-                String permission = "perms[" + p.getPerurl()+ "]";
-                filterChainDefinitionMap.put(p.getPerurl(),permission);
+            if (!StringUtils.isEmpty(p.getPerUrl())) {
+                String permission = "perms[" + p.getPerUrl()+ "]";
+                filterChainDefinitionMap.put(p.getPerUrl(),permission);
             }
         }
         filterChainDefinitionMap.put("/**", "authc");

@@ -1,10 +1,10 @@
 package com.workflow.oauth.service.impl;
 
-import com.workflow.oauth.service.PostsService;
 import com.workflow.common.base.BaseServiceImpl;
 import com.workflow.common.dao.PostsDao;
 import com.workflow.common.entity.Posts;
-import com.workflow.common.entity.User;
+import com.workflow.common.entity.SysRegistUser;
+import com.workflow.oauth.service.PostsService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -32,7 +32,7 @@ public class PostsServiceImpl extends BaseServiceImpl<PostsDao,Posts> implements
             public Predicate toPredicate(Root<Posts> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
                 Path<Integer> $id = root.get("id");
                 Path<String> $title = root.get("title");
-                Path<User> $user = root.get("user");
+                Path<SysRegistUser> $user = root.get("user");
                 Path<Boolean> $top = root.get("top");
                 Path<Boolean> $good = root.get("good");
 

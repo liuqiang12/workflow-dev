@@ -1,9 +1,9 @@
 package com.workflow.oauth.service.impl;
 
-import com.workflow.oauth.service.UserService;
 import com.workflow.common.base.BaseServiceImpl;
-import com.workflow.common.dao.UserDao;
-import com.workflow.common.entity.User;
+import com.workflow.common.dao.SysRegistUserDao;
+import com.workflow.common.entity.SysRegistUser;
+import com.workflow.oauth.service.SysRegistUserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
@@ -15,13 +15,13 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class UserServiceImpl extends BaseServiceImpl<UserDao,User> implements UserService {
+public class SysRegistUserServiceImpl extends BaseServiceImpl<SysRegistUserDao,SysRegistUser> implements SysRegistUserService {
 
     @Override
-    public Page<User> findByPage(User user, int pageNo, int length) {
+    public Page<SysRegistUser> findByPage(SysRegistUser user, int pageNo, int length) {
         PageRequest pageable = new PageRequest(pageNo, length);
 
-        Specification<User> specification = new Specification<User>() {
+        Specification<SysRegistUser> specification = new Specification<SysRegistUser>() {
             @Override
             public Predicate toPredicate(Root root, CriteriaQuery criteriaQuery, CriteriaBuilder criteriaBuilder) {
                 Path<Integer> $id = root.get("id");
@@ -32,8 +32,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao,User> implements Us
                 ArrayList<Predicate> list = new ArrayList<>();
                 if (user.getId() != null) list.add(criteriaBuilder.equal($id, user.getId()));
                 if (user.getEnable() != null) list.add(criteriaBuilder.equal($enable, user.getEnable()));
-                if (user.getUsername() != null)
-                    list.add(criteriaBuilder.like($username, "%" + user.getUsername() + "%"));
+                if (user.getUserName() != null)
+                    list.add(criteriaBuilder.like($username, "%" + user.getUserName() + "%"));
                 if (user.getEmail()!=null)
                     list.add(criteriaBuilder.like($email, "%" + user.getEmail() + "%"));
 
@@ -41,15 +41,15 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao,User> implements Us
                 return predicate;
             }
         };
-        Page<User> page = repository.findAll(specification, pageable);
+        Page<SysRegistUser> page = repository.findAll(specification, pageable);
 
         return page;
     }
 
     @Override
     public void saveUserEnable(Integer[] id) {
-        List<User> all = findAll(Arrays.asList(id));
-        for (User user :all) {
+        List<SysRegistUser> all = findAll(Arrays.asList(id));
+        for (SysRegistUser user :all) {
             if (user.getEnable() == 1) {
                 user.setEnable(0);
             } else {

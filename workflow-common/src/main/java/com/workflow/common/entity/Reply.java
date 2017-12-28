@@ -39,7 +39,7 @@ public class Reply implements Serializable {
     //与用户的关联关系
     @ManyToOne
     @JoinColumn(nullable = false, name = "user_id")
-    private User user;
+    private SysUserInfo user;
 
     public Integer getId() {
         return id;
@@ -81,11 +81,11 @@ public class Reply implements Serializable {
         this.posts = posts;
     }
 
-    public User getUser() {
+    public SysUserInfo getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(SysUserInfo user) {
         this.user = user;
     }
 

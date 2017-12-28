@@ -12,15 +12,15 @@ import java.util.Set;
  * 流程引擎的用户
  */
 @Entity
-@Table(name = "workflow_id_user")
-public class AdminUser implements Serializable{
+@Table(name = "SYS_USER_INFO")
+public class SysUserInfo implements Serializable{
 
     @Id
     @GeneratedValue
     private Integer id;
 
-    @Column(unique = true,nullable = false)
-    private String username;
+    @Column(unique = true,nullable = false,name = "USER_NAME")
+    private String userName;
 
     @Column(nullable = false)
     @JsonIgnore
@@ -32,11 +32,11 @@ public class AdminUser implements Serializable{
     private Integer enable = 1;
 
     @JsonIgnore
-    @JoinTable(name = "workflow_adminuser_role",
-            joinColumns = {@JoinColumn(name = "adminuser_id",referencedColumnName = "id")},
+    @JoinTable(name = "SYS_USER_LN_ROLE",
+            joinColumns = {@JoinColumn(name = "user_id",referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "id")})
     @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Role> roles = new HashSet<>();
+    private Set<SysRoleInfo> roles = new HashSet<SysRoleInfo>();
 
     public Integer getId() {
         return id;
@@ -46,12 +46,12 @@ public class AdminUser implements Serializable{
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -70,11 +70,11 @@ public class AdminUser implements Serializable{
         this.enable = enable;
     }
 
-    public Set<Role> getRoles() {
+    public Set<SysRoleInfo> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Set<SysRoleInfo> roles) {
         this.roles = roles;
     }
 
@@ -82,7 +82,7 @@ public class AdminUser implements Serializable{
     public String toString() {
         return "AdminUser{" +
                 "Id=" + id +
-                ", username='" + username + '\'' +
+                ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", enable=" + enable;
     }

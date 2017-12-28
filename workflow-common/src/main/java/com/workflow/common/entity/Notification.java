@@ -24,12 +24,12 @@ public class Notification {
     //要通知的用户：立即加载
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(nullable = false,name = "touser_id")
-    private User touser;
+    private SysUserInfo touser;
 
     //发起通知的用户
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(nullable = false,name = "fromuser_id")
-    private User fromuser;
+    private SysUserInfo fromuser;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(nullable = false,name = "posts_id")
@@ -56,19 +56,19 @@ public class Notification {
         isRead = read;
     }
 
-    public User getTouser() {
+    public SysUserInfo getTouser() {
         return touser;
     }
 
-    public void setTouser(User touser) {
+    public void setTouser(SysUserInfo touser) {
         this.touser = touser;
     }
 
-    public User getFromuser() {
+    public SysUserInfo getFromuser() {
         return fromuser;
     }
 
-    public void setFromuser(User fromuser) {
+    public void setFromuser(SysUserInfo fromuser) {
         this.fromuser = fromuser;
     }
 

@@ -1,6 +1,6 @@
 package com.workflow.common.dao;
 
-import com.workflow.common.entity.Role;
+import com.workflow.common.entity.SysPermission;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,12 +9,13 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-@CacheConfig(cacheNames = "roles")
-public interface RoleDao extends JpaRepository<Role,Integer>{
+@CacheConfig(cacheNames = "sysPermissions")
+public interface SysPermissionDao extends JpaRepository<SysPermission,Integer> {
 
-    Role findOne(Integer integer);
+
+    SysPermission findOne(Integer integer);
 
     @Cacheable
-    List<Role> findAll();
+    List<SysPermission> findAll();
 
 }

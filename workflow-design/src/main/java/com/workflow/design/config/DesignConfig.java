@@ -5,5 +5,5 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan(basePackages = {"com.workflow.common","com.workflow.design"})
-public class ChatConfig {
+public class DesignConfig {
 }

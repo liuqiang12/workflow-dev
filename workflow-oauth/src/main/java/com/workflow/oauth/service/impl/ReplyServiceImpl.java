@@ -1,11 +1,11 @@
 package com.workflow.oauth.service.impl;
 
-import com.workflow.oauth.service.ReplyService;
 import com.workflow.common.base.BaseServiceImpl;
 import com.workflow.common.dao.ReplyDao;
 import com.workflow.common.entity.Posts;
 import com.workflow.common.entity.Reply;
-import com.workflow.common.entity.User;
+import com.workflow.common.entity.SysRegistUser;
+import com.workflow.oauth.service.ReplyService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
@@ -27,7 +27,7 @@ public class ReplyServiceImpl extends BaseServiceImpl<ReplyDao,Reply> implements
             public Predicate toPredicate(Root<Posts> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
                 Path<Integer> $id = root.get("id");
                 Path<String> $content = root.get("content");
-                Path<User> $user = root.get("user");
+                Path<SysRegistUser> $user = root.get("user");
 
                 ArrayList<Predicate> list = new ArrayList<>();
                 if (reply.getId()!=null) list.add(criteriaBuilder.equal($id,reply.getId()));

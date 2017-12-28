@@ -1,13 +1,13 @@
 package com.workflow.oauth.service.impl;
 
-import com.workflow.oauth.service.AdminUserService;
-import com.workflow.oauth.service.PermissionService;
-import com.workflow.oauth.service.RoleService;
 import com.workflow.common.base.BaseServiceImpl;
-import com.workflow.common.dao.RoleDao;
+import com.workflow.common.dao.SysRoleInfoDao;
 import com.workflow.common.dto.Result;
-import com.workflow.common.entity.Permission;
-import com.workflow.common.entity.Role;
+import com.workflow.common.entity.SysPermission;
+import com.workflow.common.entity.SysRoleInfo;
+import com.workflow.oauth.service.SysPermissionService;
+import com.workflow.oauth.service.SysRoleInfoService;
+import com.workflow.oauth.service.SysUserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,19 +22,19 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toSet;
 @Service
 @Transactional
-public class RoleServiceImpl extends BaseServiceImpl<RoleDao, Role> implements RoleService {
+public class SysRoleInfoServiceImpl extends BaseServiceImpl<SysRoleInfoDao, SysRoleInfo> implements SysRoleInfoService {
 
     @Autowired
-    private AdminUserService userService;
+    private SysUserInfoService userService;
 
     @Autowired
-    private PermissionService permissionService;
+    private SysPermissionService permissionService;
 
     @Override
     public Result findRolesAndSelected(Integer id) {
-        Set<Role> userRole = userService.findOne(id).getRoles();
-        List<Role> roles = findAll();
-        for (Role r: roles) {
+        Set<SysRoleInfo> userRole = userService.findOne(id).getRoles();
+        List<SysRoleInfo> roles = findAll();
+        for (SysRoleInfo r: roles) {
             if (userRole.contains(r)) r.setSelected(1);
         }
 
@@ -42,15 +42,15 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleDao, Role> implements R
     }
 
     @Override
-    public Page<Role> findByPage(int pageNo, int length) {
+    public Page<SysRoleInfo> findByPage(int pageNo, int length) {
         PageRequest pageRequest = new PageRequest(pageNo, length);
-        Page<Role> page = repository.findAll(pageRequest);
+        Page<SysRoleInfo> page = repository.findAll(pageRequest);
         return page;
     }
 
     @Override
-    public void saveRolePermission(Integer roleid, Permission[] pers) {
-        Role role = findOne(roleid);
+    public void saveRolePermission(Integer roleid, SysPermission[] pers) {
+        SysRoleInfo role = findOne(roleid);
         if (pers==null){
             role.setPermissions(new HashSet<>());
         }

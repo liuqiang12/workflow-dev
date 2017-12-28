@@ -8,11 +8,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * 引擎所需要的角色
+ *
  */
 @Entity
-@Table(name = "workflow_id_role")
-public class Role implements Serializable{
+@Table(name = "SYS_ROLE_INFO")
+public class SysRoleInfo implements Serializable{
 
     @Id
     @GeneratedValue
@@ -31,15 +31,22 @@ public class Role implements Serializable{
     //角色与用户的关联关系
     @JsonIgnore
     @ManyToMany(mappedBy = "roles")
-    private Set<AdminUser> adminUsers = new HashSet<>();
+    private Set<SysUserInfo> users = new HashSet<SysUserInfo>();
 
     //角色与权限的关联关系
     @JsonIgnore
-    @JoinTable(name = "workflow_role_permission",
+    @JoinTable(name = "sys_role_ln_perm",
             joinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "permissions_id",referencedColumnName = "id")})
     @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Permission> permissions = new HashSet<>();
+    private Set<SysPermission> permissions = new HashSet<SysPermission>();
+    //角色与菜单的关联关系
+    @JsonIgnore
+    @JoinTable(name = "sys_role_ln_menu",
+            joinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "menu_id",referencedColumnName = "id")})
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<SysMenuInfo> menus = new HashSet<SysMenuInfo>();
 
     public Integer getId() {
         return id;
@@ -65,19 +72,19 @@ public class Role implements Serializable{
         this.description = description;
     }
 
-    public Set<AdminUser> getAdminUsers() {
-        return adminUsers;
+    public Set<SysUserInfo> getUsers() {
+        return users;
     }
 
-    public void setAdminUsers(Set<AdminUser> adminUsers) {
-        this.adminUsers = adminUsers;
+    public void setUsers(Set<SysUserInfo> users) {
+        this.users = users;
     }
 
-    public Set<Permission> getPermissions() {
+    public Set<SysPermission> getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(Set<Permission> permissions) {
+    public void setPermissions(Set<SysPermission> permissions) {
         this.permissions = permissions;
     }
 
@@ -87,6 +94,14 @@ public class Role implements Serializable{
 
     public void setSelected(Integer selected) {
         this.selected = selected;
+    }
+
+    public Set<SysMenuInfo> getMenus() {
+        return menus;
+    }
+
+    public void setMenus(Set<SysMenuInfo> menus) {
+        this.menus = menus;
     }
 
     @Override

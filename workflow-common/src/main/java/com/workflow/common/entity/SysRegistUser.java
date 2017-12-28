@@ -9,11 +9,13 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 用户
+ * 注册用户:可能系统用户是由外部人员注册的，注册需要通知管理员审批同意后才能登陆系统。
+ * 审批同意后清除注册用户，将注册用户信息保存到系统用户表中:
+ * 再由管理员划分权限
  */
 @Entity
-@Table(name="workflow_user")
-public class User implements Serializable {
+@Table(name="sys_regist_user")
+public class SysRegistUser implements Serializable {
 
     @Id
     @GeneratedValue
@@ -24,8 +26,8 @@ public class User implements Serializable {
     private String email;
 
     // 用户名
-    @Column(unique = true, nullable = false)
-    private String username;
+    @Column(unique = true, nullable = false,name = "USER_NAME")
+    private String userName;
 
     // 密码
     @Column(nullable = false)
@@ -58,12 +60,12 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -126,7 +128,7 @@ public class User implements Serializable {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", username='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", Icon='" + icon + '\'' +
                 ", signature='" + signature + '\'' +

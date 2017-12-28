@@ -1,19 +1,19 @@
 package com.workflow.oauth.service;
 
 import com.workflow.common.base.BaseService;
-import com.workflow.common.entity.Permission;
+import com.workflow.common.entity.SysPermission;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-public interface PermissionService extends BaseService<Permission>{
+public interface SysPermissionService extends BaseService<SysPermission>{
 
     /**
      * 根据用户id获取用户所有权限
      * @param id
      * @return
      */
-    List<Permission> loadUserPermission(Integer id);
+    List<SysPermission> loadUserPermission(Integer id);
 
     /**
      * 根据用户id，type获取用户权限
@@ -21,14 +21,14 @@ public interface PermissionService extends BaseService<Permission>{
      * @param type
      * @return
      */
-    List<Permission> loadUserPermissionByType(Integer id,Integer type);
+    List<SysPermission> loadUserPermissionByType(Integer id,Integer type);
 
     /**
      * 根据角色ID查询用户权限
      * @param id
      * @return
      */
-    List<Permission> findPermissionsAndSelected(Integer id);
+    List<SysPermission> findPermissionsAndSelected(Integer id);
 
     /**
      * 翻页查询
@@ -36,7 +36,7 @@ public interface PermissionService extends BaseService<Permission>{
      * @param length
      * @return
      */
-    Page<Permission> findByPage(int pageNo, int length);
+    Page<SysPermission> findByPage(int pageNo, int length);
 
 
 }
