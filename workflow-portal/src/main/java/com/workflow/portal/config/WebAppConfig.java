@@ -24,7 +24,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
                 "/user/seticon",
                 "/user/setpsw",
                 "/user/message",
-                "/chat");
+                "/design");
         super.addInterceptors(registry);
     }
 }

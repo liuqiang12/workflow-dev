@@ -2,12 +2,9 @@ package com.workflow.common;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import javax.sql.DataSource;
 
 
 @RunWith(SpringRunner.class)
@@ -15,8 +12,8 @@ import javax.sql.DataSource;
 @SpringBootTest
 public class CommonApplicationTest {
 
-    @Autowired
-    private DataSource dataSource;
+    /*@Autowired
+    private DataSource dataSource;*/
 
     /*@Autowired
     private com.workflow.common.dao.UserDao UserDao;*/
