@@ -1,11 +1,5 @@
 package com.workflow.rest;
 
-import com.workflow.common.dao.AdminUserDao;
-import com.workflow.common.dao.PostsDao;
-import com.workflow.rest.service.PostsService;
-import com.workflow.rest.service.RedisService;
-import com.workflow.rest.service.ReplyService;
-import com.workflow.rest.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import javax.sql.DataSource;
 
 /**
  * user.setUsername("DELL");
@@ -28,27 +20,6 @@ public class RestApplicationTest {
 
     @Autowired
     RedisTemplate redisTemplate;
-
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    DataSource dataSource;
-
-    @Autowired
-    PostsService postsService;
-
-    @Autowired
-    ReplyService replyService;
-
-    @Autowired
-    AdminUserDao dao;
-
-    @Autowired
-    RedisService<Integer> redisService;
-
-    @Autowired
-    PostsDao postsDao;
 
     @Value("${REDIS_USERID_KEY}")
     private String REDIS_USERID_KEY;
