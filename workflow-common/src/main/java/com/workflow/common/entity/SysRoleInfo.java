@@ -20,13 +20,16 @@ public class SysRoleInfo implements Serializable{
 
     @Column(unique = true,nullable = false)
     private String name;
-
+    //角色key唯一标准。权限使用
+    @Column(unique = true,nullable = false,name = "KEY_")
+    private String key;
     //角色描述
     private String description;
 
     //是否持有角色标志
     @Transient
     private Integer selected;
+
 
     //角色与用户的关联关系
     @JsonIgnore
@@ -102,6 +105,14 @@ public class SysRoleInfo implements Serializable{
 
     public void setMenus(Set<SysMenuInfo> menus) {
         this.menus = menus;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     @Override
