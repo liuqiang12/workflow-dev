@@ -8,5 +8,6 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ComponentScan(basePackages = "com.workflow.common")
+@ComponentScan(basePackages = "com.workflow.oauth")
 public class OauthConfig {
 }

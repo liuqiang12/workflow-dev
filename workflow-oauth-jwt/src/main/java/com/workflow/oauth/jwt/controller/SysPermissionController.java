@@ -4,7 +4,6 @@ import com.workflow.common.base.BaseController;
 import com.workflow.common.dto.PageResult;
 import com.workflow.common.dto.Result;
 import com.workflow.common.entity.SysPermission;
-import com.workflow.oauth.jwt.shiro.ShiroService;
 import com.workflow.oauth.jwt.service.SysPermissionService;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +18,8 @@ public class SysPermissionController extends BaseController {
     @Autowired
     private SysPermissionService permissionService;
 
-    @Autowired
-    private ShiroService shiroService;
+    /*@Autowired
+    private ShiroService shiroService;*/
 
     @PostMapping("/loadMenu")
     public List<SysPermission> loadMenu(){
@@ -59,7 +58,7 @@ public class SysPermissionController extends BaseController {
         Result result = restProcessor(() -> {
             permissionService.save(permission);
             //更新权限
-            shiroService.updatePermission();
+            //shiroService.updatePermission();
             return Result.ok();
         });
         return result;
@@ -70,7 +69,7 @@ public class SysPermissionController extends BaseController {
         Result result = restProcessor(() -> {
             permissionService.deleteInBatch(Arrays.asList(id));
             //更新权限
-            shiroService.updatePermission();
+            //shiroService.updatePermission();
             return Result.ok();
         });
         return result;

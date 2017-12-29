@@ -1,3 +1,4 @@
+/*
 package com.workflow.oauth.jwt.shiro;
 
 import com.workflow.common.entity.SysPermission;
@@ -16,9 +17,11 @@ import org.apache.shiro.util.ByteSource;
 import javax.annotation.Resource;
 import java.util.List;
 
+*/
 /**
  * 对登录进行授权，对角色、权限进行验证等
- */
+ *//*
+
 public class MyShiroRealm extends AuthorizingRealm {
 
     @Resource
@@ -27,11 +30,13 @@ public class MyShiroRealm extends AuthorizingRealm {
     @Resource
     private SysPermissionService permissionService;
 
-    /**
+    */
+/**
      * 授权
      * @param principalCollection
      * @return
-     */
+     *//*
+
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         Integer id = (Integer) principalCollection.getPrimaryPrincipal();
@@ -43,17 +48,21 @@ public class MyShiroRealm extends AuthorizingRealm {
         return info;
     }
 
-    /**
+    */
+/**
      * 认证
      * @param token
      * @return
      * @throws AuthenticationException
-     */
+     *//*
+
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         //获取用户的输入的账号.
         String username = (String)token.getPrincipal();
-        /** 获取用户信息 **/
+        */
+/** 获取用户信息 **//*
+
         SysUserInfo user = userinfoService.findByUserName(username);
         if(user==null) throw new UnknownAccountException();
         if (0==user.getEnable()) {
@@ -72,3 +81,4 @@ public class MyShiroRealm extends AuthorizingRealm {
         return authenticationInfo;
     }
 }
+*/

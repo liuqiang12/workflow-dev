@@ -1,3 +1,4 @@
+/*
 package com.workflow.oauth.jwt.shiro;
 
 import com.workflow.common.entity.SysPermission;
@@ -26,17 +27,23 @@ public class ShiroService {
     private RedisSessionDAO redisSessionDAO;
 
 
-    /**
+    */
+/**
      * 初始化权限
-     */
+     *//*
+
     public Map<String, String> loadFilterChainDefinitions() {
         // 权限控制map.从数据库获取
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         filterChainDefinitionMap.put("/logout", "logout");
-        filterChainDefinitionMap.put("/css/**","anon");
-        filterChainDefinitionMap.put("/js/**","anon");
-        filterChainDefinitionMap.put("/img/**","anon");
-        filterChainDefinitionMap.put("/font-awesome/**","anon");
+        filterChainDefinitionMap.put("/css*/
+/**","anon");
+        filterChainDefinitionMap.put("/js*/
+/**","anon");
+        filterChainDefinitionMap.put("/img*/
+/**","anon");
+        filterChainDefinitionMap.put("/font-awesome*/
+/**","anon");
         List<SysPermission> permissionList = permissionService.findAll();
         for(SysPermission p:permissionList){
 
@@ -45,13 +52,16 @@ public class ShiroService {
                 filterChainDefinitionMap.put(p.getPerUrl(),permission);
             }
         }
-        filterChainDefinitionMap.put("/**", "authc");
+        filterChainDefinitionMap.put("*/
+/**", "authc");
         return filterChainDefinitionMap;
     }
 
-    /**
+    */
+/**
      * 重新加载权限
-     */
+     *//*
+
     public void updatePermission() {
 
         synchronized (shiroFilterFactoryBean) {
@@ -89,3 +99,4 @@ public class ShiroService {
         }
     }
 }
+*/
