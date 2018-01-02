@@ -41,14 +41,14 @@ public class SysRoleInfo implements Serializable{
     @JoinTable(name = "sys_role_ln_perm",
             joinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "permissions_id",referencedColumnName = "id")})
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Set<SysPermission> permissions = new HashSet<SysPermission>();
     //角色与菜单的关联关系
     @JsonIgnore
     @JoinTable(name = "sys_role_ln_menu",
             joinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "menu_id",referencedColumnName = "id")})
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Set<SysMenuInfo> menus = new HashSet<SysMenuInfo>();
 
     public Integer getId() {

@@ -2,6 +2,7 @@ package com.workflow.oauth.jwt.config;
 
 import com.workflow.common.entity.SysRoleInfo;
 import com.workflow.common.entity.SysUserInfo;
+import com.workflow.oauth.jwt.service.SysRoleInfoService;
 import com.workflow.oauth.jwt.service.SysUserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +20,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import java.util.List;
+
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity/*开启Spring Security的功能*/
@@ -26,6 +29,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	// 查询用户使用
 	@Autowired
 	SysUserInfoService userInfoService;
+	// 查询角色
+	@Autowired
+	SysRoleInfoService roleInfoService;
+
 
 	@Autowired
 	public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
@@ -65,6 +72,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
 				// 通过用户名获取用户信息
 				SysUserInfo userInfo = userInfoService.findByUserName(name);
+				SysUserInfo userInfo1 = userInfoService.findOne(5);
+
+				SysRoleInfo roleInfo = roleInfoService.findOne(1);
+
 				if (userInfo != null) {
 					// 创建spring security安全用户:在内存中创建了用户
 					/* 用户对应的角色数组 */

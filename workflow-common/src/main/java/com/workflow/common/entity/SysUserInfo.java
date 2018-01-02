@@ -40,8 +40,11 @@ public class SysUserInfo implements Serializable{
     @JoinTable(name = "SYS_USER_LN_ROLE",
             joinColumns = {@JoinColumn(name = "user_id",referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "id")})
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Set<SysRoleInfo> roles = new HashSet<SysRoleInfo>();
+
+
+
 
     public Integer getId() {
         return id;
