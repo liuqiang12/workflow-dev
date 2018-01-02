@@ -1,8 +1,8 @@
 package com.workflow.rest;
 
+import com.workflow.rest.controller.OfficeWord4Download;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -13,7 +13,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-12-06T20:25:53.736+08:00")
 @Configuration
 @EnableSwagger2
-@EnableWebMvc
+/*@EnableWebMvc*/
 public class Swagger2Configuration {
     public static final String SWAGGER_SCAN_BASE_PACKAGE = "com.workflow.rest.controller";
     public static final String VERSION = "1.0.0";
@@ -28,6 +28,7 @@ public class Swagger2Configuration {
                 .apis(RequestHandlerSelectors.basePackage(SWAGGER_SCAN_BASE_PACKAGE))
                 .paths(PathSelectors.any())
                 .build()
+                .ignoredParameterTypes(OfficeWord4Download.class) //忽略“/list”接口参数
                 .directModelSubstitute(org.joda.time.LocalDate.class, java.sql.Date.class)
                 .directModelSubstitute(org.joda.time.DateTime.class, java.util.Date.class);
     }
