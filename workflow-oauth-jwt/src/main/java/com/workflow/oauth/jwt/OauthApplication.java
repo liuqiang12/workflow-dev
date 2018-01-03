@@ -1,5 +1,6 @@
 package com.workflow.oauth.jwt;
 
+import com.workflow.common.entity.SysRoleInfo;
 import com.workflow.common.entity.SysUserInfo;
 import com.workflow.oauth.jwt.service.SysUserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,9 @@ import org.springframework.cache.annotation.EnableCaching;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashSet;
 import java.util.Properties;
+import java.util.Set;
 
 
 @SpringBootApplication
@@ -52,18 +55,18 @@ public class OauthApplication {
     public void init(){
         try {
             SysUserInfo sysUserInfo = new SysUserInfo();
-            sysUserInfo.setUsername("liuqiang7");
+            sysUserInfo.setUsername("liuqiang9");
             sysUserInfo.setPassword("111111");
             sysUserInfo.setEmail("784248173@qq.com");
             sysUserInfo.setEnable(1);
-           /* Set<SysRoleInfo> roles = new HashSet<SysRoleInfo>();
+            Set<SysRoleInfo> roles = new HashSet<SysRoleInfo>();
             SysRoleInfo sysRoleInfo1 = new SysRoleInfo();
-            sysRoleInfo1.setName("系统管理员004");
-            sysRoleInfo1.setKey("ROOT_MANAGER_004");
-            sysRoleInfo1.setSelected(1);*/
+            sysRoleInfo1.setName("系统管理员009");
+            sysRoleInfo1.setKey("ROLE_API_USER");
+            sysRoleInfo1.setSelected(1);
 
-            /*roles.add(sysRoleInfo1);
-            sysUserInfo.setRoles(roles);*/
+            roles.add(sysRoleInfo1);
+            sysUserInfo.setRoles(roles);
 
             /*userInfoService;*/
             userInfoService.save(sysUserInfo);
