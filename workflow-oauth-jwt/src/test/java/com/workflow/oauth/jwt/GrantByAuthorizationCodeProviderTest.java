@@ -1,4 +1,3 @@
-/*
 package com.workflow.oauth.jwt;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -24,101 +23,175 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-*/
 /***
  * 通过授权码方式访问受限资源
- * 
+ *
  * @author leftso
  *
- *//*
-
+ */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class, webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = OauthApplication.class, webEnvironment = WebEnvironment.RANDOM_PORT)
 public class GrantByAuthorizationCodeProviderTest extends OAuth2Test {
 
-	@Value("${local.server.port}")
-	private int port;
+    @Value("${server.port}")
+    private static int port = 8080;
+    public static void main(String[] args) throws Exception{
+        //用户名,密码
+        String userName = "app_client";
+        String password = "nopass";
 
-	@Test
-	public void getJwtTokenByAuthorizationCode()
-			throws JsonParseException, JsonMappingException, IOException, URISyntaxException, InvalidJwtException {
-		//用户名,密码
-		String userName = "app_client";
-		String password = "nopass";
+        //步骤一：模拟返回受保护资源
+        String redirectUrl = "http://localhost:" + 8080 + "/resources/user";
+        //通过用户名密码发起请求
+        ResponseEntity<String> response = new TestRestTemplate(userName, password).postForEntity(
+                "http://localhost:" + port+ "/oauth/authorize?response_type=code&client_id=normal-app&redirect_uri={redirectUrl}",
+                null, String.class, redirectUrl);
+        //判断返回状态是否是200,如果不是跑出异常
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        //获取cookie里面的JSSIONID cookie
+        List<String> setCookie = response.getHeaders().get("Set-Cookie");
+        String jSessionIdCookie = setCookie.get(0);
+        String cookieValue = jSessionIdCookie.split(";")[0];
 
-		//步骤一：模拟返回受保护资源
-		String redirectUrl = "http://localhost:" + port + "/resources/user";
-		//通过用户名密码发起请求
-		ResponseEntity<String> response = new TestRestTemplate(userName, password).postForEntity(
-				"http://localhost:" + port+ "/oauth/authorize?response_type=code&client_id=normal-app&redirect_uri={redirectUrl}",
-				null, String.class, redirectUrl);
-		//判断返回状态是否是200,如果不是跑出异常
-		assertEquals(HttpStatus.OK, response.getStatusCode());
-		//获取cookie里面的JSSIONID cookie
-		List<String> setCookie = response.getHeaders().get("Set-Cookie");
-		String jSessionIdCookie = setCookie.get(0);
-		String cookieValue = jSessionIdCookie.split(";")[0];
+        //组织一个http请求头部,放入cookie
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Cookie", cookieValue);
+        //通过用户名密码再次发起请求获取授权码
+        response = new TestRestTemplate(userName, password).postForEntity(
+                "http://localhost:" + port+ "oauth/authorize?response_type=code&client_id=normal-app&redirect_uri={redirectUrl}&user_oauth_approval=true&authorize=Authorize",
+                new HttpEntity<>(headers), String.class, redirectUrl);
+        //判断是否是302跳转状态
+        assertEquals(HttpStatus.FOUND, response.getStatusCode());
+        assertNull(response.getBody());
 
-		//组织一个http请求头部,放入cookie
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("Cookie", cookieValue);
-		//通过用户名密码再次发起请求获取授权码
-		response = new TestRestTemplate(userName, password).postForEntity(
-			"http://localhost:" + port+ "oauth/authorize?response_type=code&client_id=normal-app&redirect_uri={redirectUrl}&user_oauth_approval=true&authorize=Authorize",
-			new HttpEntity<>(headers), String.class, redirectUrl);
-		//判断是否是302跳转状态
-		assertEquals(HttpStatus.FOUND, response.getStatusCode());
-		assertNull(response.getBody());
-		
-		String location = response.getHeaders().get("Location").get(0);
-		//获取url
-		URI locationURI = new URI(location);
-		//获取url后面的请求参数，即获取授权码code=xxx
-		String query = locationURI.getQuery();
-		
-		//组织授权码获取access token
-		location = "http://localhost:" + port + "/oauth/token?" + query
-				+ "&grant_type=authorization_code&client_id=normal-app&redirect_uri={redirectUrl}";
+        String location = response.getHeaders().get("Location").get(0);
+        //获取url
+        URI locationURI = new URI(location);
+        //获取url后面的请求参数，即获取授权码code=xxx
+        String query = locationURI.getQuery();
 
-		response = new TestRestTemplate("normal-app", "").postForEntity(location, new HttpEntity<>(new HttpHeaders()),
-				String.class, redirectUrl);
-		//判断获取access token 是否成功
-		assertEquals(HttpStatus.OK, response.getStatusCode());
+        //组织授权码获取access token
+        location = "http://localhost:" + port + "/oauth/token?" + query
+                + "&grant_type=authorization_code&client_id=normal-app&redirect_uri={redirectUrl}";
 
-		//获取access_token信息
-		HashMap<?, ?> jwtMap = new ObjectMapper().readValue(response.getBody(), HashMap.class);
-		String accessToken = (String) jwtMap.get("access_token");
+        response = new TestRestTemplate("normal-app", "").postForEntity(location, new HttpEntity<>(new HttpHeaders()),
+                String.class, redirectUrl);
+        //判断获取access token 是否成功
+        assertEquals(HttpStatus.OK, response.getStatusCode());
 
-		JwtContext jwtContext = jwtConsumer.process(accessToken);
+        //获取access_token信息
+        HashMap<?, ?> jwtMap = new ObjectMapper().readValue(response.getBody(), HashMap.class);
+        String accessToken = (String) jwtMap.get("access_token");
 
-		//打印出返回的授权信息
-		logJWTClaims(jwtContext);
+        /*JwtContext jwtContext = jwtConsumer.process(accessToken);
 
-		assertEquals(userName, jwtContext.getJwtClaims().getClaimValue("user_name"));
+        //打印出返回的授权信息
+        logJWTClaims(jwtContext);*/
 
-		//组织授权后的头部
-		headers = new HttpHeaders();
-		//oauth2的授权访问头部类型为Bearer
-		headers.set("Authorization", "Bearer " + accessToken);
+        /*assertEquals(userName, jwtContext.getJwtClaims().getClaimValue("user_name"));*/
 
-		//测试访问几个授权保护的url,分别是没有权限的/client,有权限的/user,有权限的/principal,有权限的/roles
-		
-		response = new TestRestTemplate().exchange("http://localhost:" + port + "/resources/client", HttpMethod.GET,
-				new HttpEntity<>(null, headers), String.class);
-		assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode());
+        //组织授权后的头部
+        headers = new HttpHeaders();
+        //oauth2的授权访问头部类型为Bearer
+        headers.set("Authorization", "Bearer " + accessToken);
 
-		response = new TestRestTemplate().exchange("http://localhost:" + port + "/resources/user", HttpMethod.GET,
-				new HttpEntity<>(null, headers), String.class);
-		assertEquals(HttpStatus.OK, response.getStatusCode());
+        //测试访问几个授权保护的url,分别是没有权限的/client,有权限的/user,有权限的/principal,有权限的/roles
 
-		response = new TestRestTemplate().exchange("http://localhost:" + port + "/resources/principal", HttpMethod.GET,
-				new HttpEntity<>(null, headers), String.class);
-		assertEquals(userName, response.getBody());
+        response = new TestRestTemplate().exchange("http://localhost:" + port + "/resources/client", HttpMethod.GET,
+                new HttpEntity<>(null, headers), String.class);
+        assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode());
 
-		response = new TestRestTemplate().exchange("http://localhost:" + port + "/resources/roles", HttpMethod.GET,
-				new HttpEntity<>(null, headers), String.class);
-		assertEquals("[{\"authority\":\"ROLE_USER\"}]", response.getBody());
-	}
+        response = new TestRestTemplate().exchange("http://localhost:" + port + "/resources/user", HttpMethod.GET,
+                new HttpEntity<>(null, headers), String.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+
+        response = new TestRestTemplate().exchange("http://localhost:" + port + "/resources/principal", HttpMethod.GET,
+                new HttpEntity<>(null, headers), String.class);
+        assertEquals(userName, response.getBody());
+
+        response = new TestRestTemplate().exchange("http://localhost:" + port + "/resources/roles", HttpMethod.GET,
+                new HttpEntity<>(null, headers), String.class);
+        assertEquals("[{\"authority\":\"ROLE_USER\"}]", response.getBody());
+    }
+    @Test
+    public void getJwtTokenByAuthorizationCode()
+            throws JsonParseException, JsonMappingException, IOException, URISyntaxException, InvalidJwtException {
+        //用户名,密码
+        String userName = "app_client";
+        String password = "nopass";
+
+        //步骤一：模拟返回受保护资源
+        String redirectUrl = "http://localhost:" + 8080 + "/resources/user";
+        //通过用户名密码发起请求
+        ResponseEntity<String> response = new TestRestTemplate(userName, password).postForEntity(
+                "http://localhost:" + port+ "/oauth/authorize?response_type=code&client_id=normal-app&redirect_uri={redirectUrl}",
+                null, String.class, redirectUrl);
+        //判断返回状态是否是200,如果不是跑出异常
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        //获取cookie里面的JSSIONID cookie
+        List<String> setCookie = response.getHeaders().get("Set-Cookie");
+        String jSessionIdCookie = setCookie.get(0);
+        String cookieValue = jSessionIdCookie.split(";")[0];
+
+        //组织一个http请求头部,放入cookie
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Cookie", cookieValue);
+        //通过用户名密码再次发起请求获取授权码
+        response = new TestRestTemplate(userName, password).postForEntity(
+                "http://localhost:" + port+ "oauth/authorize?response_type=code&client_id=normal-app&redirect_uri={redirectUrl}&user_oauth_approval=true&authorize=Authorize",
+                new HttpEntity<>(headers), String.class, redirectUrl);
+        //判断是否是302跳转状态
+        assertEquals(HttpStatus.FOUND, response.getStatusCode());
+        assertNull(response.getBody());
+
+        String location = response.getHeaders().get("Location").get(0);
+        //获取url
+        URI locationURI = new URI(location);
+        //获取url后面的请求参数，即获取授权码code=xxx
+        String query = locationURI.getQuery();
+
+        //组织授权码获取access token
+        location = "http://localhost:" + port + "/oauth/token?" + query
+                + "&grant_type=authorization_code&client_id=normal-app&redirect_uri={redirectUrl}";
+
+        response = new TestRestTemplate("normal-app", "").postForEntity(location, new HttpEntity<>(new HttpHeaders()),
+                String.class, redirectUrl);
+        //判断获取access token 是否成功
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+
+        //获取access_token信息
+        HashMap<?, ?> jwtMap = new ObjectMapper().readValue(response.getBody(), HashMap.class);
+        String accessToken = (String) jwtMap.get("access_token");
+
+        JwtContext jwtContext = jwtConsumer.process(accessToken);
+
+        //打印出返回的授权信息
+        logJWTClaims(jwtContext);
+
+        assertEquals(userName, jwtContext.getJwtClaims().getClaimValue("user_name"));
+
+        //组织授权后的头部
+        headers = new HttpHeaders();
+        //oauth2的授权访问头部类型为Bearer
+        headers.set("Authorization", "Bearer " + accessToken);
+
+        //测试访问几个授权保护的url,分别是没有权限的/client,有权限的/user,有权限的/principal,有权限的/roles
+
+        response = new TestRestTemplate().exchange("http://localhost:" + port + "/resources/client", HttpMethod.GET,
+                new HttpEntity<>(null, headers), String.class);
+        assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode());
+
+        response = new TestRestTemplate().exchange("http://localhost:" + port + "/resources/user", HttpMethod.GET,
+                new HttpEntity<>(null, headers), String.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+
+        response = new TestRestTemplate().exchange("http://localhost:" + port + "/resources/principal", HttpMethod.GET,
+                new HttpEntity<>(null, headers), String.class);
+        assertEquals(userName, response.getBody());
+
+        response = new TestRestTemplate().exchange("http://localhost:" + port + "/resources/roles", HttpMethod.GET,
+                new HttpEntity<>(null, headers), String.class);
+        assertEquals("[{\"authority\":\"ROLE_USER\"}]", response.getBody());
+    }
 
 }
-*/
