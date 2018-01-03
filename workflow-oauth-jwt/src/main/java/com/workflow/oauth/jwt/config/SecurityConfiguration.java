@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,8 +20,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
-import java.util.List;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -43,6 +42,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// .and()
 		// .withUser("admin").password("password").roles("ADMIN");
 		//配置用户来源于数据库
+		/**
+		 * 通过AuthenticationManagerBuilder的userDetailsService方法，设置进去就OK了。
+		 * passwordEncoder方法设置的是用户密码的加密方式，这里设置的是MD5加密，
+		 * 所以用户从前端登录时传过来的密码，在使用Security验证时会自动使用MD5加密。
+		 */
+		//auth.userDetailsService(userDetailsService()).passwordEncoder(new Md5PasswordEncoder());
 		auth.userDetailsService(userDetailsService());
 	}
 
@@ -57,6 +62,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.and()
 				.csrf()/*禁用csrf网络攻击:跨站域请求伪造*/
 				.disable();
+
 	}
 
 	@Override
@@ -71,12 +77,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			@Override
 			public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
 				// 通过用户名获取用户信息
-				SysUserInfo userInfo = userInfoService.findByUserName(name);
-				SysUserInfo userInfo1 = userInfoService.findOne(5);
-
-				SysRoleInfo roleInfo = roleInfoService.findOne(1);
-
+				SysUserInfo userInfo = userInfoService.findByUsername(name);
 				if (userInfo != null) {
+					System.out.println("userInfo--->" + userInfo.toString());
 					// 创建spring security安全用户:在内存中创建了用户
 					/* 用户对应的角色数组 */
 					SysRoleInfo[] roleinfos = userInfo.getRoles().toArray(new SysRoleInfo[]{});
@@ -85,7 +88,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 						roles[i] = roleinfos[i].getKey();
 					}
 					User user = new User(
-							userInfo.getUserName(),
+							userInfo.getUsername(),
 							userInfo.getPassword(),
 							AuthorityUtils.createAuthorityList(roles)
 					);

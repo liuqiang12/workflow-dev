@@ -1,11 +1,6 @@
 package com.workflow.oauth.jwt.controller;
 
 import com.workflow.common.entity.SysUserInfo;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.LockedAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -37,14 +32,15 @@ public class PageController {
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public String login(HttpServletRequest request, SysUserInfo user, Model model) {
 
-        if (StringUtils.isEmpty(user.getUserName())||StringUtils.isEmpty(user.getPassword())){
+        if (StringUtils.isEmpty(user.getUsername())||StringUtils.isEmpty(user.getPassword())){
             request.setAttribute("msg","用户名或者密码不能为空!");
             return "login";
         }
-        Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token=new UsernamePasswordToken(user.getUserName(),user.getPassword());
-        try {
-            subject.login(token);
+        return "init";
+        /*Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token=new UsernamePasswordToken(user.getUsername(),user.getPassword());*/
+       /* try {
+           *//* subject.login(token);*//*
             return "redirect:/initPage";
         }catch (LockedAccountException lae) {
             token.clear();
@@ -54,8 +50,8 @@ public class PageController {
             token.clear();
             request.setAttribute("msg", "用户或密码不正确！");
             return "login";
-            /*return "init";*/
-        }
+            *//*return "init";*//*
+        }*/
     }
 
     @RequestMapping("/initPage")

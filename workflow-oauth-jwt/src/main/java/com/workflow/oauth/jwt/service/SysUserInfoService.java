@@ -12,7 +12,7 @@ public interface SysUserInfoService extends BaseService<SysUserInfo>{
      * @param username
      * @return
      */
-    SysUserInfo findByUserName(String username);
+    SysUserInfo findByUsername(String username);
 
     /**
      * 根据翻页信息获取用户列表

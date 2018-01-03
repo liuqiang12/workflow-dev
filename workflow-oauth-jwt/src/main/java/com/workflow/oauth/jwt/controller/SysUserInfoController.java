@@ -46,7 +46,7 @@ public class SysUserInfoController extends BaseController {
     public Result addAdmin(SysUserInfo SysUserInfo) {
 
         Result result = restProcessor(() -> {
-            if (userInfoService.findByUserName(SysUserInfo.getUserName()) != null)
+            if (userInfoService.findByUsername(SysUserInfo.getUsername()) != null)
                 return Result.error("用户名重复");
             userInfoService.saveUser(SysUserInfo);
             return Result.ok();

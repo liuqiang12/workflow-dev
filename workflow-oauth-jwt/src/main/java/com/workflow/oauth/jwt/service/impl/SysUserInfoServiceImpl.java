@@ -28,8 +28,8 @@ public class SysUserInfoServiceImpl extends BaseServiceImpl<SysUserInfoDao, SysU
     private SysRoleInfoService roleService;
 
     @Override
-    public SysUserInfo findByUserName(String userName) {
-        return repository.findByUserName(userName);
+    public SysUserInfo findByUsername(String userName) {
+        return repository.findByUsername(userName);
     }
 
     @Override
@@ -47,8 +47,8 @@ public class SysUserInfoServiceImpl extends BaseServiceImpl<SysUserInfoDao, SysU
                 ArrayList<Predicate> list = new ArrayList<>();
                 if (userInfo.getId() != null) list.add(criteriaBuilder.equal($id, userInfo.getId()));
                 if (userInfo.getEnable() != null) list.add(criteriaBuilder.equal($enable, userInfo.getEnable()));
-                if (userInfo.getUserName() != null)
-                    list.add(criteriaBuilder.like($username, "%" + userInfo.getUserName() + "%"));
+                if (userInfo.getUsername() != null)
+                    list.add(criteriaBuilder.like($username, "%" + userInfo.getUsername() + "%"));
 
                 Predicate predicate = criteriaBuilder.and(list.toArray(new Predicate[list.size()]));
                 return predicate;

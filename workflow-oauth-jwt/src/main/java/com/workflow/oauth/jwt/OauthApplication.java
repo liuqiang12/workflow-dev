@@ -6,7 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+import org.springframework.boot.web.servlet.ErrorPage;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,7 +30,7 @@ public class OauthApplication {
      * server.port
      * @return
      */
-  /*  @Bean
+    @Bean
     public EmbeddedServletContainerCustomizer containerCustomizer() {
 
         return (container -> {
@@ -36,7 +40,7 @@ public class OauthApplication {
 
             container.addErrorPages(error401Page, error404Page, error500Page);
         });
-    }*/
+    }
 
     public static void main(String[] args) throws IOException {
         //更改properties配置文件名称,避免依赖冲突
@@ -52,7 +56,7 @@ public class OauthApplication {
     public void init(){
         try {
             SysUserInfo sysUserInfo = new SysUserInfo();
-            sysUserInfo.setUserName("liuqiang7");
+            sysUserInfo.setUsername("liuqiang7");
             sysUserInfo.setPassword("111111");
             sysUserInfo.setEmail("784248173@qq.com");
             sysUserInfo.setEnable(1);

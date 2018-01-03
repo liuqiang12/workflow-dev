@@ -20,7 +20,7 @@ public class SysUserInfo implements Serializable{
     private Integer id;
 
     @Column(unique = true,nullable = false,name = "USER_NAME")
-    private String userName;
+    private String username;
 
     @Column(nullable = false)
     @JsonIgnore
@@ -40,7 +40,7 @@ public class SysUserInfo implements Serializable{
     @JoinTable(name = "SYS_USER_LN_ROLE",
             joinColumns = {@JoinColumn(name = "user_id",referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "id")})
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Set<SysRoleInfo> roles = new HashSet<SysRoleInfo>();
 
 
@@ -54,12 +54,12 @@ public class SysUserInfo implements Serializable{
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -106,7 +106,7 @@ public class SysUserInfo implements Serializable{
     public String toString() {
         return "AdminUser{" +
                 "Id=" + id +
-                ", userName='" + userName + '\'' +
+                ", userName='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", enable=" + enable+ '\'' +
                 ", icon=" + icon+ '\'' +

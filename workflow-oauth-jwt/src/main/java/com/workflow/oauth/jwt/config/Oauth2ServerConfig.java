@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * OAuth2服务器端配置
+ * OAuth2认证授权服务端
  */
 @Configuration
 @EnableAuthorizationServer/*配置OAuth2.0 授权服务机制*/
@@ -30,8 +30,12 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     @Value("${resource.id:spring-boot-application}") // 默认值spring-boot-application
     private String resourceId;
 
-    @Value("${access_token.validity_period:3600}") // 默认值3600
-            int accessTokenValiditySeconds = 3600;
+    @Value("${access_token.validity_period:360}") // 默认值3600
+    int accessTokenValiditySeconds = 360;
+
+    @Value("${access_token.validity_period:3600}")
+    int refreshTokenValiditySeconds  = 3600;// 30 days 2592000
+
 
     @Autowired
     AuthenticationManager authenticationManager;
@@ -92,20 +96,23 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-                .withClient("normal-app")
+                .withClient("normal-app")//客户端ID
                 .authorizedGrantTypes("authorization_code", "implicit")
                 .authorities("ROLE_CLIENT")
-                .scopes("read", "write")
+                .scopes("read", "write")//授权用户的操作权限
                 .resourceIds(resourceId)
-                .accessTokenValiditySeconds(accessTokenValiditySeconds)
+                .accessTokenValiditySeconds(accessTokenValiditySeconds)//token有效期为120秒
+                .refreshTokenValiditySeconds(refreshTokenValiditySeconds)// 30 days
                 .and()
-                .withClient("trusted-app")
+                .withClient("trusted-app")//客户端ID
                 .authorizedGrantTypes("client_credentials", "password")
                 .authorities("ROLE_TRUSTED_CLIENT")
-                .scopes("read", "write")
+                .scopes("read", "write")//授权用户的操作权限
                 .resourceIds(resourceId)
-                .accessTokenValiditySeconds(accessTokenValiditySeconds)
-                .secret("secret");
+                .accessTokenValiditySeconds(accessTokenValiditySeconds)//token有效期为120秒
+                .refreshTokenValiditySeconds(refreshTokenValiditySeconds) // 30 days
+                .secret("secret");//密码
+
     }
 
     /**
@@ -113,6 +120,8 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
      * @param security
      */
     public void configure(AuthorizationServerSecurityConfigurer security){
-        security.checkTokenAccess("isAuthenticated()");
+        //security.checkTokenAccess("isAuthenticated()");
+        security.tokenKeyAccess("isAnonymous() || hasAuthority('ROLE_TRUSTED_CLIENT')");
+        security.checkTokenAccess("hasAuthority('ROLE_TRUSTED_CLIENT')");
     }
 }
