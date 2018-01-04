@@ -41,14 +41,15 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     AuthenticationManager authenticationManager;
 
     /**
+     * 配置授权类型
      * 用来配置授权（authorization）以及令牌（token）的访问端点和令牌服务(token services)
      * @param endpoints
      * @throws Exception
      */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception{
-        endpoints.authenticationManager(this.authenticationManager);
-        endpoints.accessTokenConverter(accessTokenConverter());
+        endpoints.authenticationManager(this.authenticationManager);//认证管理器 当你选择了资源所有者密码（password）授权类型的时候，请设置这个属性注入一个 AuthenticationManager 对象。
+        endpoints.accessTokenConverter(accessTokenConverter());//
         endpoints.tokenStore(tokenStore());
     }
     /**
@@ -56,6 +57,9 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
      */
     @Bean
     public JwtAccessTokenConverter accessTokenConverter() {
+        /**
+         * 资源服务器也需要一个解码的Token令牌的类 JwtAccessTokenConverter
+         */
         JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter() {
             /***
              * 重写增强token方法,用于自定义一些token返回的信息
@@ -84,6 +88,11 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
      */
     @Bean
     public TokenStore tokenStore() {
+        /*
+            JSON Web Token（JWT）
+            令牌相关的数据进行编码
+         */
+
         TokenStore tokenStore = new JwtTokenStore(accessTokenConverter());
         return tokenStore;
     }
@@ -95,15 +104,17 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
+        clients.inMemory()// 使用in-memory存储 即 ."内存存储"
+                //常规web
                 .withClient("normal-app")//客户端ID
-                .authorizedGrantTypes("authorization_code", "implicit")
-                .authorities("ROLE_CLIENT")
+                .authorizedGrantTypes("authorization_code", "implicit")//该client允许的授权类型：authorization_code：授权码模式
+                .authorities("ROLE_CLIENT")//授权给客户端的权限
                 .scopes("read", "write")//授权用户的操作权限
                 .resourceIds(resourceId)
                 .accessTokenValiditySeconds(accessTokenValiditySeconds)//token有效期为120秒
                 .refreshTokenValiditySeconds(refreshTokenValiditySeconds)// 30 days
                 .and()
+
                 .withClient("trusted-app")//客户端ID
                 .authorizedGrantTypes("client_credentials", "password")
                 .authorities("ROLE_TRUSTED_CLIENT")
@@ -111,7 +122,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
                 .resourceIds(resourceId)
                 .accessTokenValiditySeconds(accessTokenValiditySeconds)//token有效期为120秒
                 .refreshTokenValiditySeconds(refreshTokenValiditySeconds) // 30 days
-                .secret("secret");//密码
+                .secret("secret");// （需要值得信任的客户端）客户端安全码，如果有的话。client_secret
 
     }
 

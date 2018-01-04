@@ -32,7 +32,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	SysRoleInfoService roleInfoService;
 
-
+	/**
+	 * 全局域配置用户
+	 * 设置后刷新令牌授权类型模式的流程中就会包含这个检查，用来确保这个账号是否仍然有效
+	 * @param auth
+	 * @throws Exception
+	 */
 	@Autowired
 	public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
 		// auth.inMemoryAuthentication()
@@ -51,6 +56,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(userDetailsService());
 	}
 
+	/**
+	 *
+	 * @param http
+	 * @throws Exception
+	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		//设置被保护的URL

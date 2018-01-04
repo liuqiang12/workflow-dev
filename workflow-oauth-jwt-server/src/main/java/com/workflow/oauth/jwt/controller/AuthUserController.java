@@ -34,7 +34,7 @@ public class AuthUserController {
      * 需要用户角色权限
      * @return
      */
-    @PreAuthorize("hasRole('ROLE_API_USER')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value="/user", method=RequestMethod.GET)
     public String helloUser() {
         return "hello user1111";

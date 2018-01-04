@@ -55,20 +55,19 @@ public class OauthApplication {
     public void init(){
         try {
             SysUserInfo sysUserInfo = new SysUserInfo();
-            sysUserInfo.setUsername("liuqiang9");
+            sysUserInfo.setUsername("liuqiang10");
             sysUserInfo.setPassword("111111");
             sysUserInfo.setEmail("784248173@qq.com");
             sysUserInfo.setEnable(1);
             Set<SysRoleInfo> roles = new HashSet<SysRoleInfo>();
             SysRoleInfo sysRoleInfo1 = new SysRoleInfo();
-            sysRoleInfo1.setName("系统管理员009");
-            sysRoleInfo1.setKey("ROLE_API_USER");
+            sysRoleInfo1.setName("系统管理员010");
+            sysRoleInfo1.setKey("ROLE_USER");
             sysRoleInfo1.setSelected(1);
 
             roles.add(sysRoleInfo1);
             sysUserInfo.setRoles(roles);
 
-            /*userInfoService;*/
             userInfoService.save(sysUserInfo);
         } catch (Exception e) {
             e.printStackTrace();

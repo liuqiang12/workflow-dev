@@ -100,7 +100,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
 	/**
 	 * 创建一个默认的资源服务token
-	 * 
+	 * 类的实例，用来实现令牌服务
 	 * @return
 	 */
 	@Bean
