@@ -44,7 +44,7 @@ public class OauthApplication {
     public static void main(String[] args) throws IOException {
         //更改properties配置文件名称,避免依赖冲突
         Properties properties = new Properties();
-        InputStream in = OauthApplication.class.getClassLoader().getResourceAsStream("oauth-jwt.properties");
+        InputStream in = OauthApplication.class.getClassLoader().getResourceAsStream("oauth-jwt-server.properties");
         properties.load(in);
         SpringApplication app = new SpringApplication(OauthApplication.class);
         app.setDefaultProperties(properties);

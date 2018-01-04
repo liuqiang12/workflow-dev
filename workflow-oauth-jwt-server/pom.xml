@@ -11,7 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.workflow</groupId>
     <artifactId>workflow-oauth-jwt-server</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <properties>
         <spring-security-oauth2.version>2.2.0.RELEASE</spring-security-oauth2.version>
