@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * OAuth2.0
@@ -29,13 +30,13 @@ public class OauthRefreshToken implements Serializable {
     /**
      * 存储将OAuth2RefreshToken.java对象序列化后的二进制数据
      */
-    @Column(name = "token")
-    private String token;
+    @Column(name="token", columnDefinition="BLOB")
+    private byte[] token;
     /**
      * 存储将OAuth2Authentication.java对象序列化后的二进制数据
      */
-    @Column(name = "AUTHENTICATION")
-    private String authentication;
+    @Column(name="AUTHENTICATION", columnDefinition="BLOB")
+    private byte[] authentication;
 
     @Column(name = "create_time")
     private Integer createTime = DateUtils.now().getSecond();
@@ -48,8 +49,8 @@ public class OauthRefreshToken implements Serializable {
         final StringBuffer sb = new StringBuffer("OauthRefreshToken{");
         sb.append("id=").append(id);
         sb.append(", tokenId='").append(tokenId).append('\'');
-        sb.append(", token='").append(token).append('\'');
-        sb.append(", authentication='").append(authentication).append('\'');
+        sb.append(", token='").append(Arrays.toString(token)).append('\'');
+        sb.append(", authentication='").append(Arrays.toString(authentication)).append('\'');
         sb.append(", createTime=").append(createTime);
         sb.append('}');
         return sb.toString();
@@ -63,15 +64,36 @@ public class OauthRefreshToken implements Serializable {
         this.tokenId = tokenId;
     }
 
-    public void setToken(String token) {
+    public void setToken(byte[] token) {
         this.token = token;
     }
 
-    public void setAuthentication(String authentication) {
+    public void setAuthentication(byte[] authentication) {
         this.authentication = authentication;
     }
-
     public void setCreateTime(Integer createTime) {
         this.createTime = createTime;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getTokenId() {
+        return tokenId;
+    }
+
+    public byte[] getToken() {
+        return token;
+    }
+
+    public byte[] getAuthentication() {
+        return authentication;
+    }
+
+    public Integer getCreateTime() {
+        return createTime;
+    }
+
+
 }

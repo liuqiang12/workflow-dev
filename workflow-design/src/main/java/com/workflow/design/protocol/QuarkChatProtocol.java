@@ -99,7 +99,7 @@ public class QuarkChatProtocol {
     public static String buildMessageCode(SysUserInfo user,String msg){
         HashMap<String, Object> map = new HashMap<>();
         map.put("uid",user.getId());
-        map.put("name",user.getUserName());
+        map.put("name",user.getUsername());
         map.put("icon",user.getIcon());
         map.put("time", DateTimeUtil.getCurrentDateTime());
         map.put("msg",msg);

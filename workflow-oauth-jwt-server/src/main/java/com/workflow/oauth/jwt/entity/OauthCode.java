@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * OAuth2.0
@@ -24,8 +25,8 @@ public class OauthCode implements Serializable {
     /**
      * 存存储将AuthorizationRequestHolder.java对象序列化后的二进制数据.
      */
-    @Column(name = "AUTHENTICATION")
-    private String authentication;
+    @Column(name="AUTHENTICATION", columnDefinition="BLOB")
+    private byte[] authentication;
     /**
      * 存储服务端系统生成的code的值(未加密).
      */
@@ -41,7 +42,7 @@ public class OauthCode implements Serializable {
     public String toString() {
         final StringBuffer sb = new StringBuffer("OauthCode{");
         sb.append("id=").append(id);
-        sb.append(", authentication='").append(authentication).append('\'');
+        sb.append(", authentication='").append(Arrays.toString(authentication)).append('\'');
         sb.append(", code='").append(code).append('\'');
         sb.append(", createTime=").append(createTime);
         sb.append('}');
@@ -56,11 +57,11 @@ public class OauthCode implements Serializable {
         this.id = id;
     }
 
-    public String getAuthentication() {
+    public byte[] getAuthentication() {
         return authentication;
     }
 
-    public void setAuthentication(String authentication) {
+    public void setAuthentication(byte[] authentication) {
         this.authentication = authentication;
     }
 

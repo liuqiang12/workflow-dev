@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * OAuth2.0
@@ -29,8 +30,8 @@ public class OauthAccessToken implements Serializable {
     /**
      * 存储将OAuth2RefreshToken.java对象序列化后的二进制数据
      */
-    @Column(name = "token")
-    private String token;
+    @Column(name="token", columnDefinition="BLOB")
+    private byte[] token;
     /**
      * 该字段具有唯一性, 其值是根据当前的username(如果有),client_id与scope通过MD5加密生成的. 具体实现请参考DefaultAuthenticationKeyGenerator.java类.
      */
@@ -50,8 +51,8 @@ public class OauthAccessToken implements Serializable {
     /**
      * 存储将OAuth2Authentication.java对象序列化后的二进制数据
      */
-    @Column(name = "AUTHENTICATION")
-    private String authentication;
+    @Column(name="AUTHENTICATION", columnDefinition="BLOB")
+    private byte[] authentication;
     /**
      * 该字段的值是将refresh_token的值通过MD5加密后存储的.
      */
@@ -69,11 +70,11 @@ public class OauthAccessToken implements Serializable {
         final StringBuffer sb = new StringBuffer("OauthAccessToken{");
         sb.append("id=").append(id);
         sb.append(", tokenId='").append(tokenId).append('\'');
-        sb.append(", token='").append(token).append('\'');
+        sb.append(", token='").append(Arrays.toString(token)).append('\'');
         sb.append(", authenticationId='").append(authenticationId).append('\'');
         sb.append(", userName='").append(userName).append('\'');
         sb.append(", clientId='").append(clientId).append('\'');
-        sb.append(", authentication='").append(authentication).append('\'');
+        sb.append(", authentication='").append(Arrays.toString(authentication)).append('\'');
         sb.append(", refreshToken='").append(refreshToken).append('\'');
         sb.append(", createTime=").append(createTime);
         sb.append('}');
@@ -96,11 +97,11 @@ public class OauthAccessToken implements Serializable {
         this.tokenId = tokenId;
     }
 
-    public String getToken() {
+    public byte[] getToken() {
         return token;
     }
 
-    public void setToken(String token) {
+    public void setToken(byte[] token) {
         this.token = token;
     }
 
@@ -128,11 +129,11 @@ public class OauthAccessToken implements Serializable {
         this.clientId = clientId;
     }
 
-    public String getAuthentication() {
+    public byte[] getAuthentication() {
         return authentication;
     }
 
-    public void setAuthentication(String authentication) {
+    public void setAuthentication(byte[] authentication) {
         this.authentication = authentication;
     }
 

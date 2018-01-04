@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * OAuth2.0
@@ -36,8 +37,9 @@ public class OauthClientToken implements Serializable {
     /**
      * 存储将OAuth2AccessToken.java对象序列化后的二进制数据, 是真实的AccessToken的数据值
      */
-    @Column(name = "token")
-    private String token;
+    @Column(name="token", columnDefinition="BLOB")
+    private byte[] token;
+
     /**
      * 该字段具有唯一性, 其值是根据当前的username(如果有),client_id与scope通过MD5加密生成的. 具体实现请参考DefaultAuthenticationKeyGenerator.java类
      */
@@ -51,8 +53,8 @@ public class OauthClientToken implements Serializable {
     /**
      * 存储将OAuth2Authentication.java对象序列化后的二进制数据
      */
-    @Column(name = "AUTHENTICATION")
-    private String authentication;
+    @Column(name="AUTHENTICATION", columnDefinition="BLOB")
+    private byte[] authentication;
     /**
      * 该字段的值是将refresh_token的值通过MD5加密后存储的.
      */
@@ -71,10 +73,10 @@ public class OauthClientToken implements Serializable {
         sb.append("id=").append(id);
         sb.append(", clientId='").append(clientId).append('\'');
         sb.append(", tokenId='").append(tokenId).append('\'');
-        sb.append(", token='").append(token).append('\'');
+        sb.append(", token='").append(Arrays.toString(token)).append('\'');
         sb.append(", authenticationId='").append(authenticationId).append('\'');
         sb.append(", username='").append(username).append('\'');
-        sb.append(", authentication='").append(authentication).append('\'');
+        sb.append(", authentication='").append(Arrays.toString(authentication)).append('\'');
         sb.append(", refreshToken='").append(refreshToken).append('\'');
         sb.append(", createTime='").append(createTime).append('\'');
         sb.append('}');
@@ -105,11 +107,11 @@ public class OauthClientToken implements Serializable {
         this.tokenId = tokenId;
     }
 
-    public String getToken() {
+    public byte[] getToken() {
         return token;
     }
 
-    public void setToken(String token) {
+    public void setToken(byte[] token) {
         this.token = token;
     }
 
@@ -129,11 +131,11 @@ public class OauthClientToken implements Serializable {
         this.username = username;
     }
 
-    public String getAuthentication() {
+    public byte[] getAuthentication() {
         return authentication;
     }
 
-    public void setAuthentication(String authentication) {
+    public void setAuthentication(byte[] authentication) {
         this.authentication = authentication;
     }
 
