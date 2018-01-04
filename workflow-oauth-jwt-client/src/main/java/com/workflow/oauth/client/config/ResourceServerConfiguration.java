@@ -60,7 +60,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 	/**
 	 * token存储,这里使用jwt方式存储
 	 * 
-	 * @param accessTokenConverter
+	 * @param
 	 * @return
 	 */
 	@Bean
