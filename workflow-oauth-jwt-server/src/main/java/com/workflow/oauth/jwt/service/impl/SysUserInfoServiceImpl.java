@@ -5,7 +5,6 @@ import com.workflow.common.dao.SysUserInfoDao;
 import com.workflow.common.entity.system.SysRoleInfo;
 import com.workflow.common.entity.system.SysUserInfo;
 import com.workflow.oauth.jwt.service.SysRoleInfoService;
-import com.workflow.oauth.jwt.utils.PasswordHelper;
 import com.workflow.oauth.jwt.service.SysUserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -62,10 +61,10 @@ public class SysUserInfoServiceImpl extends BaseServiceImpl<SysUserInfoDao, SysU
 
     @Override
     public void saveUser(SysUserInfo entity) {
-        entity.setEnable(1);
+       /* entity.setEnable(1);
         PasswordHelper passwordHelper = new PasswordHelper();
         passwordHelper.encryptPassword(entity);
-        save(entity);
+        save(entity);*/
     }
 
     @Override

@@ -1,3 +1,4 @@
+/*
 package com.workflow.oauth.jwt.controller;
 
 import com.workflow.common.base.BaseController;
@@ -18,8 +19,10 @@ public class SysPermissionController extends BaseController {
     @Autowired
     private SysPermissionService permissionService;
 
-    /*@Autowired
-    private ShiroService shiroService;*/
+    */
+/*@Autowired
+    private ShiroService shiroService;*//*
+
 
     @PostMapping("/loadMenu")
     public List<SysPermission> loadMenu(){
@@ -76,3 +79,4 @@ public class SysPermissionController extends BaseController {
     }
 
 }
+*/

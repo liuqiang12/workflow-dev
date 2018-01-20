@@ -13,6 +13,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- 使用较新的Java版本 -->
         <java.version>1.8</java.version>
 
         <druid.version>1.0.29</druid.version>
@@ -31,6 +32,7 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- spring-boot pom依赖 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -38,12 +40,13 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- Druid是Java语言中最好的数据库连接池。Druid能够提供强大的监控和扩展功能 -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
                 <version>${druid.version}</version>
             </dependency>
-            <dependency>
+            <!--<dependency>
                 <groupId>org.apache.shiro</groupId>
                 <artifactId>shiro-spring</artifactId>
                 <version>${shiro.version}</version>
@@ -52,22 +55,22 @@
                 <groupId>org.apache.shiro</groupId>
                 <artifactId>shiro-web</artifactId>
                 <version>${shiro.version}</version>
-            </dependency>
+            </dependency>-->
             <dependency>
                 <groupId>com.github.theborakompanioni</groupId>
                 <artifactId>thymeleaf-extras-shiro</artifactId>
                 <version>${shiro.th.version}</version>
             </dependency>
-            <dependency>
+            <!--<dependency>
                 <groupId>org.apache.shiro</groupId>
                 <artifactId>shiro-ehcache</artifactId>
                 <version>${shiro.th.version}</version>
-            </dependency>
-            <dependency>
+            </dependency>-->
+            <!--<dependency>
                 <groupId>org.crazycake</groupId>
                 <artifactId>shiro-redis</artifactId>
                 <version>${shiro.redis.version}</version>
-            </dependency>
+            </dependency>-->
             <dependency>
                 <groupId>net.sourceforge.nekohtml</groupId>
                 <artifactId>nekohtml</artifactId>
@@ -90,6 +93,11 @@
                 <artifactId>jackson-annotations</artifactId>
                 <version>${fasterxml.version}</version>
             </dependency>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${commons-lang.version}</version>
+            </dependency>
             <!--Spring RESTful接口文档化 -->
             <dependency>
                 <groupId>io.springfox</groupId>
@@ -101,23 +109,17 @@
                 <artifactId>springfox-swagger-ui</artifactId>
                 <version>${springfox.version}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
+            <!-- 处理包括ISO8601标准在内的date和time。可以利用它把JDK Date和Calendar类完全替换掉，而且仍然能够提供很好的集成 -->
             <dependency>
                 <groupId>joda-time</groupId>
                 <artifactId>joda-time</artifactId>
                 <version>${joda-time}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/com.mangofactory/swagger-models -->
+            <!-- 用于生成、描述、调用和可视化 RESTful 风格的 Web 服务 -->
             <dependency>
                 <groupId>com.mangofactory</groupId>
                 <artifactId>swagger-models</artifactId>
                 <version>${swagger-models}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
-            <dependency>
-                <groupId>commons-lang</groupId>
-                <artifactId>commons-lang</artifactId>
-                <version>${commons-lang.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

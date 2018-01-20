@@ -1,3 +1,4 @@
+/*
 package com.workflow.oauth.jwt.utils;
 
 import com.workflow.common.entity.system.SysUserInfo;
@@ -15,3 +16,4 @@ public class PasswordHelper {
         user.setPassword(newPassword);
     }
 }
+*/
