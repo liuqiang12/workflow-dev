@@ -1,5 +1,7 @@
 package com.workflow.oauth.jwt;
 
+import com.workflow.common.entity.system.SysRoleInfo;
+import com.workflow.common.entity.system.SysUserInfo;
 import com.workflow.oauth.jwt.service.SysUserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -9,7 +11,9 @@ import org.springframework.cache.annotation.EnableCaching;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashSet;
 import java.util.Properties;
+import java.util.Set;
 
 
 @SpringBootApplication
@@ -47,26 +51,30 @@ public class Oauth2Application {
         app.run(args);
 //        SpringApplication.run(CommonApplication.class, args);
     }
-    /*@Autowired
+    @Autowired
     public void init(){
         try {
             SysUserInfo sysUserInfo = new SysUserInfo();
-            sysUserInfo.setUsername("liuqiang10");
-            sysUserInfo.setPassword("111111");
-            sysUserInfo.setEmail("784248173@qq.com");
-            sysUserInfo.setEnable(1);
-            Set<SysRoleInfo> roles = new HashSet<SysRoleInfo>();
-            SysRoleInfo sysRoleInfo1 = new SysRoleInfo();
-            sysRoleInfo1.setName("系统管理员010");
-            sysRoleInfo1.setKey("ROLE_USER");
-            sysRoleInfo1.setSelected(1);
+            /* 判断liuqiang用户是否存在 */
+            SysUserInfo userinfoTmp = userInfoService.findByUsername("liuqiang1");
+            if(userinfoTmp == null){
+                sysUserInfo.setUsername("liuqiang1");
+                sysUserInfo.setPassword("111111");
+                sysUserInfo.setEmail("784248173@qq.com");
+                sysUserInfo.setEnable(1);
+                Set<SysRoleInfo> roles = new HashSet<SysRoleInfo>();
+                SysRoleInfo sysRoleInfo1 = new SysRoleInfo();
+                sysRoleInfo1.setName("系统管理员010");
+                sysRoleInfo1.setKey("ROLE_USER");
+                sysRoleInfo1.setSelected(1);
 
-            roles.add(sysRoleInfo1);
-            sysUserInfo.setRoles(roles);
+                roles.add(sysRoleInfo1);
+                sysUserInfo.setRoles(roles);
 
-            userInfoService.save(sysUserInfo);
+                userInfoService.save(sysUserInfo);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }*/
+    }
 }
