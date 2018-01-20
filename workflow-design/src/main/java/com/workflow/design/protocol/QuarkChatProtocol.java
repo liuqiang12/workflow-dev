@@ -1,7 +1,7 @@
 package com.workflow.design.protocol;
 
 import com.alibaba.fastjson.JSONObject;
-import com.workflow.common.entity.SysUserInfo;
+import com.workflow.common.entity.system.SysUserInfo;
 import com.workflow.design.utils.DateTimeUtil;
 
 import java.util.HashMap;
