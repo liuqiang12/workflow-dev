@@ -7,9 +7,9 @@ import com.workflow.oauth.jwt.service.SysUserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,7 +22,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@Order(2)
+@EnableGlobalMethodSecurity(prePostEnabled=true, jsr250Enabled = true)
 @EnableWebSecurity/*开启Spring Security的功能*/
 public class Oauth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	// 查询用户使用
