@@ -1,4 +1,4 @@
-package com.workflow.common.entity;
+package com.workflow.common.entity.system;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -7,25 +7,28 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-
+/**
+ * 菜单角色  多对多关系
+ */
 @Entity
-@Table(name = "SYS_PERMISSION_INFO")
-public class SysPermission implements Serializable{
+@Table(name = "SYS_MENU_INFO")
+public class SysMenuInfo implements Serializable{
 
     @Id
     @GeneratedValue
     private Integer id;
 
     private String name;
+
     @Column(unique = true, name = "PER_URL")
     private String perUrl;
-
-    //资源类型　　1：菜单　2：按钮
-    private Integer type;
 
     //父权限
     @Column(name = "PARENT_ID")
     private Integer parentId;
+
+    //资源类型　　1：菜单　2：按钮
+    private Integer type = 2;//默认是按钮类型
 
     //排序
     private Integer sort;
@@ -35,7 +38,7 @@ public class SysPermission implements Serializable{
     private String checked;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "permissions")
+    @ManyToMany(mappedBy = "menus")
     private Set<SysRoleInfo> roles = new HashSet<SysRoleInfo>();
 
     public Integer getId() {

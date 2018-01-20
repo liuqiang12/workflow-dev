@@ -2,7 +2,7 @@ package com.workflow.rest.service.impl;
 
 import com.workflow.common.base.BaseServiceImpl;
 import com.workflow.common.dao.SysUserInfoDao;
-import com.workflow.common.entity.SysUserInfo;
+import com.workflow.common.entity.system.SysUserInfo;
 import com.workflow.rest.service.SysRegistUserService;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package com.workflow.common.dao;
 
-import com.workflow.common.entity.SysPermission;
+import com.workflow.common.entity.system.SysPermission;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,7 +1,7 @@
 package com.workflow.oauth.jwt.service;
 
 import com.workflow.common.base.BaseService;
-import com.workflow.common.entity.SysUserInfo;
+import com.workflow.common.entity.system.SysUserInfo;
 import org.springframework.data.domain.Page;
 
 

@@ -3,7 +3,7 @@ package com.workflow.oauth.jwt.controller;
 import com.workflow.common.base.BaseController;
 import com.workflow.common.dto.PageResult;
 import com.workflow.common.dto.Result;
-import com.workflow.common.entity.SysPermission;
+import com.workflow.common.entity.system.SysPermission;
 import com.workflow.oauth.jwt.service.SysPermissionService;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;

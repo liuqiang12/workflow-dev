@@ -26,7 +26,7 @@ import java.util.Map;
  */
 @Configuration
 @EnableAuthorizationServer/*配置OAuth2.0 授权服务机制*/
-public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
+public class Oauth2AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     @Value("${resource.id:spring-boot-application}") // 默认值spring-boot-application
     private String resourceId;
 

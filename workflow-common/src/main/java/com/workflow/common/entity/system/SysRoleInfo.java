@@ -1,4 +1,4 @@
-package com.workflow.common.entity;
+package com.workflow.common.entity.system;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

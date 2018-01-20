@@ -25,8 +25,7 @@ public class OauthClientDetails implements Serializable {
     @Id
     @GeneratedValue
     private Integer id;
-
-    @Column(unique = true, name = "CLIENT_ID",nullable = false)
+    @Column(name = "CLIENT_ID",unique = true,nullable = false)
     private String clientId;
     @Column(name = "resource_ids")
     private String resourceIds;
@@ -105,6 +104,14 @@ public class OauthClientDetails implements Serializable {
     public OauthClientDetails() {
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Integer autoApprove() {
         return autoApprove;
     }
@@ -176,7 +183,8 @@ public class OauthClientDetails implements Serializable {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append("OauthClientDetails");
-        sb.append("{createTime=").append(createTime);
+        sb.append("{id=").append(id);
+        sb.append(", createTime=").append(createTime);
         sb.append(", archived=").append(archived);
         sb.append(", clientId='").append(clientId).append('\'');
         sb.append(", resourceIds='").append(resourceIds).append('\'');
@@ -251,5 +259,117 @@ public class OauthClientDetails implements Serializable {
     public OauthClientDetails archived(Integer archived) {
         this.archived = archived;
         return this;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
+    public String getResourceIds() {
+        return resourceIds;
+    }
+
+    public void setResourceIds(String resourceIds) {
+        this.resourceIds = resourceIds;
+    }
+
+    public String getClientSecret() {
+        return clientSecret;
+    }
+
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = clientSecret;
+    }
+
+    public String getScope() {
+        return scope;
+    }
+
+    public void setScope(String scope) {
+        this.scope = scope;
+    }
+
+    public String getAuthorizedGrantTypes() {
+        return authorizedGrantTypes;
+    }
+
+    public void setAuthorizedGrantTypes(String authorizedGrantTypes) {
+        this.authorizedGrantTypes = authorizedGrantTypes;
+    }
+
+    public String getWebServerRedirectUri() {
+        return webServerRedirectUri;
+    }
+
+    public void setWebServerRedirectUri(String webServerRedirectUri) {
+        this.webServerRedirectUri = webServerRedirectUri;
+    }
+
+    public String getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(String authorities) {
+        this.authorities = authorities;
+    }
+
+    public Integer getAccessTokenValidity() {
+        return accessTokenValidity;
+    }
+
+    public void setAccessTokenValidity(Integer accessTokenValidity) {
+        this.accessTokenValidity = accessTokenValidity;
+    }
+
+    public Integer getRefreshTokenValidity() {
+        return refreshTokenValidity;
+    }
+
+    public void setRefreshTokenValidity(Integer refreshTokenValidity) {
+        this.refreshTokenValidity = refreshTokenValidity;
+    }
+
+    public String getAdditionalInformation() {
+        return additionalInformation;
+    }
+
+    public void setAdditionalInformation(String additionalInformation) {
+        this.additionalInformation = additionalInformation;
+    }
+
+    public Integer getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Integer createTime) {
+        this.createTime = createTime;
+    }
+
+    public Integer getArchived() {
+        return archived;
+    }
+
+    public void setArchived(Integer archived) {
+        this.archived = archived;
+    }
+
+    public Integer getTrusted() {
+        return trusted;
+    }
+
+    public void setTrusted(Integer trusted) {
+        this.trusted = trusted;
+    }
+
+    public Integer getAutoApprove() {
+        return autoApprove;
+    }
+
+    public void setAutoApprove(Integer autoApprove) {
+        this.autoApprove = autoApprove;
     }
 }

@@ -2,10 +2,7 @@ package com.workflow.oauth.jwt.entity;
 
 import com.workflow.common.utils.DateUtils;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Arrays;
 
@@ -13,7 +10,7 @@ import java.util.Arrays;
  * OAuth2.0
  */
 @Entity
-@javax.persistence.Table(name = "OAUTH_REFRESH_TOKEN")
+@Table(name = "OAUTH_REFRESH_TOKEN")
 public class OauthRefreshToken implements Serializable {
     private static final long serialVersionUID = -6947822646185526939L;
 
@@ -21,7 +18,6 @@ public class OauthRefreshToken implements Serializable {
     @Id
     @GeneratedValue
     private Integer id;
-
     /**
      * 该该字段的值是将refresh_token的值通过MD5加密后存储的.
      */
@@ -75,9 +71,9 @@ public class OauthRefreshToken implements Serializable {
         this.createTime = createTime;
     }
 
-    public Integer getId() {
+    /*public Integer getId() {
         return id;
-    }
+    }*/
 
     public String getTokenId() {
         return tokenId;

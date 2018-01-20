@@ -1,12 +1,11 @@
-package com.workflow.common.entity;
+package com.workflow.common.entity.system;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 流程引擎的用户
@@ -35,6 +34,19 @@ public class SysUserInfo implements Serializable{
     //注册邮箱
     @Column(nullable = false)
     private String email;
+    //最后一次登录时间
+    private Date lastLoginTime;
+    //创建时间
+    @Column(name = "CREATE_TIME")
+    private Long createTime = new Date().getTime();
+    //Default user is initial when create database, do not delete
+    @Column(name = "DEFAULT_USER")
+    private Integer defaultUser = 0;
+    /**
+     * 所属用户:枚举类型  Privilege 多个以逗号隔开
+     */
+    @Column(name = "PRIVILEGE")
+    private String privilege;
 
     @JsonIgnore
     @JoinTable(name = "SYS_USER_LN_ROLE",
@@ -42,9 +54,6 @@ public class SysUserInfo implements Serializable{
             inverseJoinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "id")})
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Set<SysRoleInfo> roles = new HashSet<SysRoleInfo>();
-
-
-
 
     public Integer getId() {
         return id;
@@ -100,6 +109,83 @@ public class SysUserInfo implements Serializable{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    public SysUserInfo() {
+    }
+
+    public SysUserInfo(String username, String password, Integer enable, String icon, String email) {
+        this.username = username;
+        this.password = password;
+        this.enable = enable;
+        this.icon = icon;
+        this.email = email;
+    }
+
+    public SysUserInfo email(String email) {
+        this.email = email;
+        return this;
+    }
+
+
+    public SysUserInfo username(String username) {
+        this.username = username;
+        return this;
+    }
+
+
+    public Date lastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public SysUserInfo lastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+        return this;
+    }
+
+    public SysUserInfo createTime(Long createTime) {
+        this.createTime = createTime;
+        return this;
+    }
+
+    public SysUserInfo password(String password) {
+        this.password = password;
+        return this;
+    }
+
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
+
+    public Long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
+    }
+
+    public Integer isDefaultUser() {
+        return defaultUser;
+    }
+
+    public void setDefaultUser(Integer defaultUser) {
+        this.defaultUser = defaultUser;
+    }
+
+    public Integer getDefaultUser() {
+        return defaultUser;
+    }
+
+    public String getPrivilege() {
+        return privilege;
+    }
+
+    public void setPrivilege(String privilege) {
+        this.privilege = privilege;
     }
 
     @Override

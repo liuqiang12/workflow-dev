@@ -2,8 +2,8 @@ package com.workflow.oauth.jwt.service.impl;
 
 import com.workflow.common.base.BaseServiceImpl;
 import com.workflow.common.dao.SysUserInfoDao;
-import com.workflow.common.entity.SysRoleInfo;
-import com.workflow.common.entity.SysUserInfo;
+import com.workflow.common.entity.system.SysRoleInfo;
+import com.workflow.common.entity.system.SysUserInfo;
 import com.workflow.oauth.jwt.service.SysRoleInfoService;
 import com.workflow.oauth.jwt.utils.PasswordHelper;
 import com.workflow.oauth.jwt.service.SysUserInfoService;

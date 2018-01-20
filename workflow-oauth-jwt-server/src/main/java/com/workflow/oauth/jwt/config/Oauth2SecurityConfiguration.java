@@ -1,7 +1,7 @@
 package com.workflow.oauth.jwt.config;
 
-import com.workflow.common.entity.SysRoleInfo;
-import com.workflow.common.entity.SysUserInfo;
+import com.workflow.common.entity.system.SysRoleInfo;
+import com.workflow.common.entity.system.SysUserInfo;
 import com.workflow.oauth.jwt.service.SysRoleInfoService;
 import com.workflow.oauth.jwt.service.SysUserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity/*开启Spring Security的功能*/
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class Oauth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	// 查询用户使用
 	@Autowired
 	SysUserInfoService userInfoService;

@@ -1,7 +1,7 @@
 package com.workflow.rest.service;
 
 import com.workflow.common.base.BaseService;
-import com.workflow.common.entity.SysUserInfo;
+import com.workflow.common.entity.system.SysUserInfo;
 
 public interface SysRegistUserService extends BaseService<SysUserInfo> {
 

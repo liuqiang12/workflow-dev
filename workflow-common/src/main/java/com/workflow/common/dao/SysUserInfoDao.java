@@ -1,6 +1,6 @@
 package com.workflow.common.dao;
 
-import com.workflow.common.entity.SysUserInfo;
+import com.workflow.common.entity.system.SysUserInfo;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;

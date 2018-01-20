@@ -1,6 +1,6 @@
 package com.workflow.oauth.jwt.utils;
 
-import com.workflow.common.entity.SysUserInfo;
+import com.workflow.common.entity.system.SysUserInfo;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 public class PasswordHelper {

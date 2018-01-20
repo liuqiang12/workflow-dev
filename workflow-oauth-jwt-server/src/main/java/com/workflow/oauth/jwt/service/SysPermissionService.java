@@ -1,7 +1,7 @@
 package com.workflow.oauth.jwt.service;
 
 import com.workflow.common.base.BaseService;
-import com.workflow.common.entity.SysPermission;
+import com.workflow.common.entity.system.SysPermission;
 import org.springframework.data.domain.Page;
 
 import java.util.List;

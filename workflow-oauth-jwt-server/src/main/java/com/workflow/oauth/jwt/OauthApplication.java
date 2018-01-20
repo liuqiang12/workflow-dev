@@ -1,7 +1,5 @@
 package com.workflow.oauth.jwt;
 
-import com.workflow.common.entity.SysRoleInfo;
-import com.workflow.common.entity.SysUserInfo;
 import com.workflow.oauth.jwt.service.SysUserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -11,9 +9,7 @@ import org.springframework.cache.annotation.EnableCaching;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashSet;
 import java.util.Properties;
-import java.util.Set;
 
 
 @SpringBootApplication
@@ -51,7 +47,7 @@ public class OauthApplication {
         app.run(args);
 //        SpringApplication.run(CommonApplication.class, args);
     }
-    @Autowired
+    /*@Autowired
     public void init(){
         try {
             SysUserInfo sysUserInfo = new SysUserInfo();
@@ -72,5 +68,5 @@ public class OauthApplication {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

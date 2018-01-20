@@ -2,8 +2,8 @@ package com.workflow.oauth.jwt.service;
 
 import com.workflow.common.base.BaseService;
 import com.workflow.common.dto.Result;
-import com.workflow.common.entity.SysPermission;
-import com.workflow.common.entity.SysRoleInfo;
+import com.workflow.common.entity.system.SysPermission;
+import com.workflow.common.entity.system.SysRoleInfo;
 import org.springframework.data.domain.Page;
 
 public interface SysRoleInfoService extends BaseService<SysRoleInfo> {

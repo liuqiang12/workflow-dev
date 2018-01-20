@@ -17,10 +17,16 @@ import java.util.Arrays;
 public class OauthClientToken implements Serializable {
     private static final long serialVersionUID = -6947822646185526939L;
 
+    /**
+     * 该字段具有唯一性, 其值是根据当前的username(如果有),client_id与scope通过MD5加密生成的. 具体实现请参考DefaultAuthenticationKeyGenerator.java类
+     */
     /* 主键信息 */
     @Id
     @GeneratedValue
     private Integer id;
+
+    @Column(name = "AUTHENTICATION_ID",unique = true,columnDefinition = "VARCHAR(256)")
+    private String authenticationId;
 
     /**
      * 主键,必须唯一,不能为空.
@@ -40,11 +46,7 @@ public class OauthClientToken implements Serializable {
     @Column(name="token", columnDefinition="BLOB")
     private byte[] token;
 
-    /**
-     * 该字段具有唯一性, 其值是根据当前的username(如果有),client_id与scope通过MD5加密生成的. 具体实现请参考DefaultAuthenticationKeyGenerator.java类
-     */
-    @Column(unique = true,name = "AUTHENTICATION_ID")
-    private String authenticationId;
+
     /**
      * 登录时的用户名, 若客户端没有用户名(如grant_type="client_credentials"),则该值等于client_id
      */
@@ -67,10 +69,19 @@ public class OauthClientToken implements Serializable {
     public OauthClientToken() {
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("OauthClientToken{");
-        sb.append("id=").append(id);
+
+        sb.append(", id='").append(id).append('\'');
         sb.append(", clientId='").append(clientId).append('\'');
         sb.append(", tokenId='").append(tokenId).append('\'');
         sb.append(", token='").append(Arrays.toString(token)).append('\'');
@@ -83,13 +94,6 @@ public class OauthClientToken implements Serializable {
         return sb.toString();
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getClientId() {
         return clientId;

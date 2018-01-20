@@ -3,7 +3,7 @@ package com.workflow.oauth.jwt.controller;
 import com.workflow.common.base.BaseController;
 import com.workflow.common.dto.PageResult;
 import com.workflow.common.dto.Result;
-import com.workflow.common.entity.SysUserInfo;
+import com.workflow.common.entity.system.SysUserInfo;
 import com.workflow.oauth.jwt.service.SysUserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

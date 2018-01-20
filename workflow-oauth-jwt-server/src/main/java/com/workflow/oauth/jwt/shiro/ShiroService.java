@@ -1,7 +1,7 @@
 /*
 package com.workflow.oauth.jwt.shiro;
 
-import com.workflow.common.entity.SysPermission;
+import com.workflow.common.entity.system.SysPermission;
 import com.workflow.oauth.jwt.service.SysPermissionService;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.mgt.DefaultFilterChainManager;
