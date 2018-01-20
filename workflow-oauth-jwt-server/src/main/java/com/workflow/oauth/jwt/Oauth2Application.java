@@ -15,7 +15,7 @@ import java.util.Properties;
 @SpringBootApplication
 @EnableAutoConfiguration
 @EnableCaching//缓存支持
-public class OauthApplication {
+public class Oauth2Application {
     // 查询用户使用
     @Autowired
     SysUserInfoService userInfoService;
@@ -40,9 +40,9 @@ public class OauthApplication {
     public static void main(String[] args) throws IOException {
         //更改properties配置文件名称,避免依赖冲突
         Properties properties = new Properties();
-        InputStream in = OauthApplication.class.getClassLoader().getResourceAsStream("oauth-jwt-server.properties");
+        InputStream in = Oauth2Application.class.getClassLoader().getResourceAsStream("oauth-jwt-server.properties");
         properties.load(in);
-        SpringApplication app = new SpringApplication(OauthApplication.class);
+        SpringApplication app = new SpringApplication(Oauth2Application.class);
         app.setDefaultProperties(properties);
         app.run(args);
 //        SpringApplication.run(CommonApplication.class, args);
