@@ -3,6 +3,7 @@ package com.workflow.oauth.client.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -24,7 +25,8 @@ import javax.servlet.http.HttpServletRequest;
  *
  */
 @Configuration
-@EnableResourceServer
+//@EnableResourceServer
+@Order(9)
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
 	@Value("${resource.id:spring-boot-application}")

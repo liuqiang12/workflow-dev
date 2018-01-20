@@ -1,3 +1,4 @@
+/*
 package com.workflow.oauth.client.config;
 
 import org.springframework.context.annotation.Configuration;
@@ -24,3 +25,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
 }
+*/
