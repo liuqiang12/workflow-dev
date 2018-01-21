@@ -168,7 +168,7 @@ public class OAuth2RestController implements InitializingBean, ApplicationContex
         }
 
         if (isAuthCodeRequest(parameters)) {
-            // The scope was requested or determined during the authorization step
+            // The scope was requested or determined during the auth step
             if (!tokenRequest.getScope().isEmpty()) {
                 LOG.debug("Clearing scope of incoming token request");
                 tokenRequest.setScope(Collections.<String>emptySet());

@@ -42,7 +42,7 @@ public class Oauth2AuthorizationServerConfig extends AuthorizationServerConfigur
 
     /**
      * 配置授权类型
-     * 用来配置授权（authorization）以及令牌（token）的访问端点和令牌服务(token services)
+     * 用来配置授权（auth）以及令牌（token）的访问端点和令牌服务(token services)
      * @param endpoints
      * @throws Exception
      */

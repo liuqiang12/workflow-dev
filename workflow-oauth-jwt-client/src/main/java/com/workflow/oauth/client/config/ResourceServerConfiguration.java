@@ -1,3 +1,4 @@
+/*
 package com.workflow.oauth.client.config;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -17,12 +18,14 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import javax.servlet.http.HttpServletRequest;
 
+*/
 /**
  * 资源服务端
  * 
  * @author leftso
  *
- */
+ *//*
+
 @Configuration
 //@EnableResourceServer
 @Order(9)
@@ -58,34 +61,42 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 	}
 
 	// ===================================================以下代码与认证服务器一致=========================================
-	/**
+	*/
+/**
 	 * token存储,这里使用jwt方式存储
 	 * 
 	 * @param
 	 * @return
-	 */
+	 *//*
+
 	@Bean
 	public TokenStore tokenStore() {
 		TokenStore tokenStore = new JwtTokenStore(accessTokenConverter());
 		return tokenStore;
 	}
 
-	/**
+	*/
+/**
 	 * Token转换器必须与认证服务一致
 	 * 
 	 * @return
-	 */
+	 *//*
+
 	@Bean
 	public JwtAccessTokenConverter accessTokenConverter() {
 		JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter() {
-//			/***
+//			*/
+/***
 //			 * 重写增强token方法,用于自定义一些token返回的信息
-//			 */
+//			 *//*
+
 //			@Override
 //			public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
 //				String userName = authentication.getUserAuthentication().getName();
 //				User user = (User) authentication.getUserAuthentication().getPrincipal();// 与登录时候放进去的UserDetail实现类一直查看link{SecurityConfiguration}
-//				/** 自定义一些token属性 ***/
+//				*/
+/** 自定义一些token属性 ***//*
+
 //				final Map<String, Object> additionalInformation = new HashMap<>();
 //				additionalInformation.put("userName", userName);
 //				additionalInformation.put("roles", user.getAuthorities());
@@ -99,11 +110,13 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 		return accessTokenConverter;
 	}
 
-	/**
+	*/
+/**
 	 * 创建一个默认的资源服务token
 	 * 类的实例，用来实现令牌服务
 	 * @return
-	 */
+	 *//*
+
 	@Bean
 	public ResourceServerTokenServices defaultTokenServices() {
 		final DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
@@ -113,3 +126,4 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 	}
 	// ===================================================以上代码与认证服务器一致=========================================
 }
+*/
