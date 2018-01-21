@@ -51,6 +51,8 @@ public class Oauth2AuthorizationServerConfig extends AuthorizationServerConfigur
         endpoints.authenticationManager(this.authenticationManager);//认证管理器 当你选择了资源所有者密码（password）授权类型的时候，请设置这个属性注入一个 AuthenticationManager 对象。
         endpoints.accessTokenConverter(accessTokenConverter());//
         endpoints.tokenStore(tokenStore());
+        //授权界面
+        endpoints.pathMapping("/oauth/confirm_access", "/extenal/oauth/confirm_access");
     }
     /**
      * token converter

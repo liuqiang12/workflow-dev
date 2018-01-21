@@ -66,13 +66,32 @@ public class Oauth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		//设置被保护的URL
 		http.authorizeRequests()
-				.antMatchers(HttpMethod.OPTIONS).permitAll()/*获取服务器支持的HTTP请求方法；AJAX进行跨域请求时的预检，需要向另外一个域名的资源发送一个HTTP OPTIONS请求头，用以判断实际发送的请求是否安全*/
-				.anyRequest().authenticated()
+				.antMatchers("/css/**","/font-awesome/**", "/js/**","/img/**","favicon.png").permitAll()
+				.antMatchers("/", "/login").permitAll()
 				.and()
-				.httpBasic()/* 认证通过弹出框输入密码验证 */
+				.formLogin()/* 都是请求的后台地址 */
+				.loginPage("/login")
+				.defaultSuccessUrl("/init")
+				.failureUrl("/loginError")
+				.usernameParameter("username")
+				.passwordParameter("password")
+				.permitAll()
 				.and()
 				.csrf()/*禁用csrf网络攻击:跨站域请求伪造*/
-				.disable();
+				.disable();;
+
+
+
+
+
+		/*http.authorizeRequests()
+				.antMatchers(HttpMethod.OPTIONS).permitAll()*//*获取服务器支持的HTTP请求方法；AJAX进行跨域请求时的预检，需要向另外一个域名的资源发送一个HTTP OPTIONS请求头，用以判断实际发送的请求是否安全*//*
+				.anyRequest().authenticated()
+				.and()
+				.httpBasic()*//* 认证通过弹出框输入密码验证 *//*
+				.and()
+				.csrf()*//*禁用csrf网络攻击:跨站域请求伪造*//*
+				.disable();*/
 
 	}
 
