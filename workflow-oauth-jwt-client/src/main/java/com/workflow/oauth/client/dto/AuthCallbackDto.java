@@ -4,6 +4,9 @@ import org.apache.commons.lang.StringUtils;
 
 import java.io.Serializable;
 
+/**
+ * @author Shengzhao Li
+ */
 public class AuthCallbackDto implements Serializable {
 
 

@@ -5,6 +5,7 @@ package com.workflow.oauth.client.dto;
  * <p/>
  * {"access_token":"d580fbfe-da2c-4840-8b66-848168ad8d62","token_type":"bearer","refresh_token":"9406e12f-d62e-42bd-ad40-0206d94ae776","expires_in":43199,"scope":"read write"}
  *
+ * @author Shengzhao Li
  */
 public class AccessTokenDto extends AbstractOauthDto {
 

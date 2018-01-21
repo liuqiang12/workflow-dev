@@ -27,15 +27,14 @@ public class AuthorizationCodeController {
     private static final Logger LOG = LoggerFactory.getLogger(AuthorizationCodeController.class);
 
 
-    @Value("#{properties['user-authorization-uri']}")
+    @Value("${user-authorization-uri}")
     private String userAuthorizationUri;
 
 
-    @Value("#{properties['application-host']}")
+    @Value("${application-host}")
     private String host;
 
-
-    @Value("#{properties['unityUserInfoUri']}")
+    @Value("${unityUserInfoUri}")
     private String unityUserInfoUri;
 
 

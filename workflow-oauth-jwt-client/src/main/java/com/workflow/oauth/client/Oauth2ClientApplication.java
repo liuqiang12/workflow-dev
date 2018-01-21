@@ -12,13 +12,13 @@ import java.util.Properties;
 @SpringBootApplication
 @EnableAutoConfiguration
 @EnableCaching//缓存支持
-public class OauthJwtClientApplication {
+public class Oauth2ClientApplication {
 
 	public static void main(String[] args) throws IOException {
 		Properties properties = new Properties();
-		InputStream in = OauthJwtClientApplication.class.getClassLoader().getResourceAsStream("oauth-jwt-client.properties");
+		InputStream in = Oauth2ClientApplication.class.getClassLoader().getResourceAsStream("oauth-jwt-client.properties");
 		properties.load(in);
-		SpringApplication app = new SpringApplication(OauthJwtClientApplication.class);
+		SpringApplication app = new SpringApplication(Oauth2ClientApplication.class);
 		app.setDefaultProperties(properties);
 		app.run(args);
 	}

@@ -7,6 +7,7 @@ import java.util.Map;
 /**
  * http://localhost:8083/spring-oauth-server/oauth/token?client_id=mobile-client&client_secret=mobile&grant_type=refresh_token&refresh_token=b36f4978-a172-4aa8-af89-60f58abe3ba1
  *
+ * @author Shengzhao Li
  */
 public class RefreshAccessTokenDto implements Serializable {
 

@@ -9,6 +9,7 @@ import java.util.Map;
  * <p/>
  * http://localhost:8080/oauth/token?client_id=unity-client&client_secret=unity&grant_type=authorization_code&code=zLl170&redirect_uri=http%3a%2f%2flocalhost%3a8080%2funity%2fdashboard.htm
  *
+ * @author Shengzhao Li
  */
 public class AuthAccessTokenDto implements Serializable {
 

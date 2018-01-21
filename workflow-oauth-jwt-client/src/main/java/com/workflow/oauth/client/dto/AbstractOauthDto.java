@@ -1,9 +1,12 @@
 package com.workflow.oauth.client.dto;
 
-
+import org.apache.commons.lang.StringUtils;
 
 import java.io.Serializable;
 
+/**
+ * @author Shengzhao Li
+ */
 public abstract class AbstractOauthDto implements Serializable {
 
 

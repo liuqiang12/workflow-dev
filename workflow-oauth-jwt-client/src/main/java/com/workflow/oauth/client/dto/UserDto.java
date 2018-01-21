@@ -7,6 +7,7 @@ import java.util.List;
  * JSON data:
  * {"archived":false,"email":"unity@wdcy.cc","guid":"55b713df1c6f423e842ad68668523c49","phone":"","privileges":["UNITY"],"username":"unity"}
  *
+ * @author Shengzhao Li
  */
 public class UserDto extends AbstractOauthDto {
 
