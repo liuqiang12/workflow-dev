@@ -1,0 +1,14 @@
+#top{
+  position: absolute;
+  top:0;
+  height:100px;
+  width: 100%;
+  background-color: #00B83F;
+}
+#bottom{
+  position: absolute;
+  bottom:0;
+  height:100px;
+  width: 100%;
+  background-color: #00B83F;
+}
