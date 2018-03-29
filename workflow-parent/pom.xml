@@ -7,9 +7,6 @@
     <groupId>com.workflow</groupId>
     <artifactId>workflow-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>..</module>
-    </modules>
     <packaging>pom</packaging>
 
     <!-- 集中定义依赖版本号与基本配置 -->
