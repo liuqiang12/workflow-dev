@@ -1,3 +1,7 @@
-
 .idea
 target
+*.lst
+*.lst
+workflow-rest/target/*
+workflow-portal/target/*
+workflow-portal/target/classes/portal.properties
